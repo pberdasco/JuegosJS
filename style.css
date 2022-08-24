@@ -1,0 +1,226 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+
+
+/* ============================   Header General  ============================== */  
+header{
+    background-color: lightgrey;
+    height: 3rem;
+}
+
+header h1{
+    color: rgb(72, 118, 121);
+    text-align: center;
+}
+
+
+/* ========================== Cuerpo general con Nav y Main ===================== */
+
+.cuerpo{ 
+    display: flex; 
+    min-height: 40rem;
+    background-color: lightskyblue;
+}
+
+nav{
+    padding-top: 1rem;
+    width: 20%;
+    background-color: gray;
+    text-align: center;
+}
+
+nav ul{
+    list-style-type: none; 
+}
+
+.botonNav{
+    margin: .5rem;
+    padding: 1rem; 
+    border-radius: 5px;
+    border-color: rgb(123, 159, 161);
+    background-color: rgb(123, 159, 161);
+    min-width: 12rem;
+    text-align: center;
+}
+
+.botonNav:hover{
+    background-color: rgb(79, 117, 119);
+}
+
+
+main{
+    width: 80%;
+    padding: 1rem;
+    background-color: rgb(123, 159, 161);
+}
+
+.recuadros{
+    border: solid 1px black;
+    min-height: 2rem;
+    margin: 1rem;
+    padding: .5rem;
+}
+
+.tituloJuego{
+    color: lightgray;
+    text-align: center;
+}
+
+.espacioJuego{
+    min-height: 30rem;
+}
+
+
+/* ============================= Ahorcado ============================= */
+
+.botonStart{
+    margin: .5rem;
+    padding: .5rem;
+    border-radius: 5px;
+    background-color: lightgray;
+    min-width: 6rem;
+    height: 2rem;
+    text-align: center;
+}
+
+.botonStart:hover{
+    background-color: grey;
+}
+
+.espacioPalabra{
+    margin-top: 2rem;
+    display: flex;
+}
+
+.palabra{
+    min-width: 80%;
+}
+
+/* --- Dibujo ahorcado --- */
+#bloque{
+    display: flex;
+}
+
+#antesCabeza{
+    width: 1.25rem;
+}
+#cabeza{
+    border-radius: 100%;
+    background-color:rgb(123, 159, 161);
+    width: 2rem;
+    height: 2rem;
+}
+
+
+#brazoIzq{
+    background-color:rgb(123, 159, 161);
+    width: 2rem;
+    height: .5rem;
+}
+#cuerpo{
+    background-color:rgb(123, 159, 161);
+    width: .5rem;
+    height: 4rem;
+}
+#brazoDer{
+    background-color:rgb(123, 159, 161);
+    width: 2rem;
+    height: .5rem;
+}
+
+
+#antesPiernas{
+    width: 1.5rem;
+}
+#piernaIzq{
+    background-color:rgb(123, 159, 161);
+    width: .5rem;
+    height: 2.5rem;
+}
+#interPiernas{
+    width: .5rem;
+}
+#piernaDer{
+    background-color:rgb(123, 159, 161);
+    width: .5rem;
+    height: 2.5rem;
+}
+
+
+/* =========================== Footer General ========================= */
+footer{
+    background-color: lightgrey;
+    min-height: 1.5rem;
+    text-align: center;
+}
+
+footer p{
+    font-size: 1 rem;
+    color: rgb(72, 118, 121);
+    /* color: rgb(123, 159, 161); */
+}
+
+
+
+/*
+
+
+.botonStart{
+    margin: .5rem;
+    padding: 1rem;
+    border-radius: 5px;
+    background-color: lightgray;
+    min-width: 8rem;
+    height: 3rem;
+    text-align: center;
+}
+
+.botonStart:hover{
+    background-color: grey;
+}
+
+.dos-columnas{
+    display: flex;
+}
+
+.dos-columnas h3{
+    min-width: 80%;
+}
+
+.circular{
+    width: 10rem;
+    height: 10rem;
+    margin: .5rem;
+    background-color: red;
+    border: solid 1px black;
+    
+}
+.half-circle{
+    display: flex;
+    justify-content: center;
+}
+.top-left{
+    border-radius: 100% 0 0 0;
+}
+.top-right{
+    border-radius: 0 100% 0 0;
+}
+.bottom-right{
+    border-radius: 0 0 100%  0;
+}
+.bottom-left{
+    border-radius: 0 0 0 100%;
+}
+
+.botonTecla{
+    margin: .2rem;
+    padding: .5rem;
+    border-radius: 5px;
+    border-color: lightgray;
+    background-color: lightgray;
+    min-width: 2.5rem;
+    text-align: center;
+}
+*/

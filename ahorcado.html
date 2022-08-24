@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba JS</title>
+
+    <link rel="stylesheet" href="./style.css">
+    <script src="./scripts/ahorcadoUI.js"></script>   <!-- Funciones para mostrar horca y palabra en la página -->
+    <script src="./scripts/ahorcadoFunc.js"></script> <!-- Funciones para desarrollar el juego -->
+    <script src="./scripts/menu.js"></script>         <!-- Manejo de botones del menu : General -->
+    
+</head>
+
+<body>
+    <header>
+        <h1>Juegos</h1>
+    </header>
+
+    <div class="cuerpo">
+        <nav>
+            <ul>
+                <li><button class="botonNav" type="button" onclick="CargarPagina('./ahorcado.html')" id="btnAhorcado">Ahorcado</button></li>
+                <li><button class="botonNav" type="button" onclick="CargarPagina('./index.html')" id="btnSimon">Pagina Principal</button></li>
+            </ul>
+        </nav>
+        <main class="areaTrabajo">
+            <section class="recuadros tituloJuego">
+                <h3 id="texto">Ahorcado</h3>
+            </section>
+            <section class="recuadros espacioJuego">
+                <div class="espacioPalabra">
+                    <h2 id="palabra" class="palabra"></h2>
+                    <button class="botonStart" type="button" onclick="ResetAhorcado()" id="btnStart">Reiniciar</button>
+                </div>
+                <div id="espacioHorca">
+                    <div id="bloque">
+                        <div id="antesCabeza"></div>
+                        <div id="cabeza"></div>
+                    </div>
+                    <div id="bloque">
+                        <div id="brazoIzq"></div>
+                        <div id="cuerpo"></div>
+                        <div id="brazoDer"></div>
+                    </div>
+                    <div id="bloque">
+                        <div id="antesPiernas"></div>
+                        <div id="piernaIzq"></div>
+                        <div id="interPiernas"></div>
+                        <div id="piernaDer"></div>
+                    </div>
+                </div>
+            </section>
+            
+        </main>
+    </div>
+    
+    <footer>
+        <p>CoderHouse - Berdasco - JavaScript - Ejercicios</p>
+    </footer>
+
+    <script>
+        ResetAhorcado();
+    </script>
+</body>
+</html>
