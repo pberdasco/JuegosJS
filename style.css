@@ -1,3 +1,11 @@
+/* =============================== Variables ==================================== */
+:root{
+    --head-foot-color: lightgray;
+    --main-color: rgb(123, 159, 161);
+    /* --main-color: rgb(144, 152, 189); */
+    --nav-color: gray;
+}
+/* ================================ General ==================================== */
 * {
     margin: 0;
     padding: 0;
@@ -6,7 +14,7 @@
 
 /* ============================   Header General  ============================== */  
 header{
-    background-color: lightgrey;
+    background-color: var(--head-foot-color);
     height: 3rem;
 }
 
@@ -21,13 +29,12 @@ header h1{
 .cuerpo{ 
     display: flex; 
     min-height: 40rem;
-    background-color: lightskyblue;
 }
 
 nav{
     padding-top: 1rem;
     width: 20%;
-    background-color: gray;
+    background-color: var(--nav-color);
     text-align: center;
 }
 
@@ -39,8 +46,8 @@ nav ul{
     margin: .5rem;
     padding: 1rem; 
     border-radius: 5px;
-    border-color: rgb(123, 159, 161);
-    background-color: rgb(123, 159, 161);
+    border-color: var(--main-color);
+    background-color: var(--main-color);
     min-width: 12rem;
     text-align: center;
 }
@@ -53,7 +60,7 @@ nav ul{
 main{
     width: 80%;
     padding: 1rem;
-    background-color: rgb(123, 159, 161);
+    background-color: var(--main-color);
 }
 
 .recuadros{
@@ -64,7 +71,7 @@ main{
 }
 
 .tituloJuego{
-    color: lightgray;
+    color: var(--head-foot-color);
     text-align: center;
 }
 
@@ -79,22 +86,24 @@ main{
     margin: .5rem;
     padding: .5rem;
     border-radius: 5px;
-    background-color: lightgray;
+    background-color: var(--head-foot-color);
     min-width: 6rem;
     height: 2rem;
     text-align: center;
 }
 
 .botonStart:hover{
-    background-color: grey;
+    background-color: var(--nav-color);
 }
 
 .espacioPalabra{
     margin-top: 2rem;
     display: flex;
+    justify-content: space-between;
 }
 
 .palabra{
+    text-align: center;
     min-width: 80%;
 }
 
@@ -108,24 +117,24 @@ main{
 }
 #cabeza{
     border-radius: 100%;
-    background-color:rgb(123, 159, 161);
+    background-color: var(--main-color);
     width: 2rem;
     height: 2rem;
 }
 
 
 #brazoIzq{
-    background-color:rgb(123, 159, 161);
+    background-color:var(--main-color);
     width: 2rem;
     height: .5rem;
 }
 #cuerpo{
-    background-color:rgb(123, 159, 161);
+    background-color:var(--main-color);
     width: .5rem;
     height: 4rem;
 }
 #brazoDer{
-    background-color:rgb(123, 159, 161);
+    background-color:var(--main-color);
     width: 2rem;
     height: .5rem;
 }
@@ -135,7 +144,7 @@ main{
     width: 1.5rem;
 }
 #piernaIzq{
-    background-color:rgb(123, 159, 161);
+    background-color:var(--main-color);
     width: .5rem;
     height: 2.5rem;
 }
@@ -143,7 +152,7 @@ main{
     width: .5rem;
 }
 #piernaDer{
-    background-color:rgb(123, 159, 161);
+    background-color:var(--main-color);
     width: .5rem;
     height: 2.5rem;
 }
@@ -151,7 +160,7 @@ main{
 
 /* =========================== Footer General ========================= */
 footer{
-    background-color: lightgrey;
+    background-color: var(--head-foot-color);
     min-height: 1.5rem;
     text-align: center;
 }

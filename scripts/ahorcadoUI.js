@@ -1,12 +1,16 @@
 
 // ====================== Pruebas base - Setear un texto en DOM =========================
 const colorMuestra = "darkgoldenrod";
-const colorOculta = "rgb(123, 159, 161)";
+
+const cssRoot = document.styleSheets[0].cssRules[0].style;
+const colorOculta = cssRoot.getPropertyValue('--main-color');  // oculta pintando del mismo color que main.
+
 
 
 function DisplayPalabra(palabra){
+    console.log(palabra);
     let espacioPalabra = document.getElementById("palabra");
-    espacioPalabra.textContent = palabra;
+    espacioPalabra.textContent = palabra;   
 }
 
 

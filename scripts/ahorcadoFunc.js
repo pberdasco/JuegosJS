@@ -1,25 +1,97 @@
 const listaPalabrasPosibles = ["murcielago", "marsupial", "helicoptero", "automata", "hiperbola", "legumbre", "uniforme", "entrepiso"]; 
+let palabraElegida;
+let letrasAcertadas;
 
 function ResetAhorcado(){
-
     palabraElegida = ElegirPalabra();
-
-    // generar un string que tenga _ donde no conozco aun la letra o la letra cuando si la conozco
-    // DisplayPalabra(palabra)
-    // pedir que se ingrese una letra con prompt (el pedido de letra meterlo en una funcion que llame a prompt)
-    // verificar si la letra esta en la palabraElegida
-    //     si esta volver a mostrar la palabra elegida con la letra reemplazada
-    // contar un error mas y determinar hasta donde dibujar al hombre (1 error = cabeza, 2 errores = cabeza+tronco, etc)
-    // llamar a las funciones de dibujo de ahorcadoUI.js
-
-
-
+    letrasAcertadas = InicializarLetrasAcertadas(); 
+    
+    JugarAhorcado();    
 }
 
+function JugarAhorcado(){
+    const MAX_ERRORES = 7;
+    let errores = 0;
+
+    do { 
+        let mostrar = PalabraVisible();
+        DisplayPalabra(mostrar); 
+
+        letra = prompt("Ingrese una letra").toLocaleUpperCase();
+
+        acertada = ValidarLetraIngresada(letra);
+        console.log(`acertada ${acertada}`);
+        if(acertada === 0){
+            MostrarHorca(errores);
+            errores++;
+        }
+    } while(errores < MAX_ERRORES && acertada !== 2)
+
+    console.log("Ganaste");
+}
+
+function MostrarHorca(errores){
+    console.log(`Errores: ${errores}`);
+}
+
+function ValidarLetraIngresada(letra){
+    // ademas devuelve:  0 si no encontro la letra
+    //                   1 si encontro la letra
+    //                   2 si encontro la letra pero ademas termino de acertar la palabra
+    let acertada = 0;
+    console.log("ingrese con letra: ", letra); 
+    for(let i = 0; i < palabraElegida.length; i++){
+        console.log(letra, palabraElegida[i].toUpperCase())
+        if(letra === palabraElegida[i].toUpperCase()){
+            letrasAcertadas[i] = true;
+            acertada = 1; 
+            console.log(i,letra, palabraElegida[i], letrasAcertadas[i]); 
+        }
+    }
+    if (PalabraCompleta()){
+        acertada = 2;  
+    }
+    return acertada;
+}
+
+function PalabraCompleta(){
+    resultado = true;
+    for(let i = 0; i < letrasAcertadas.length; i++){
+        if(letrasAcertadas[i] = false){
+            resultado = false;
+        }
+    }
+}
+
+function InicializarLetrasAcertadas(){
+    const letrasAcertadas = [];
+    for(let i = 1; i <= palabraElegida.length; i++){
+        letrasAcertadas.push(false);
+    }
+    return letrasAcertadas;
+}
+
+function PalabraVisible(){
+    console.log(letrasAcertadas);
+                
+    
+    let resultado = "";
+    for(let i = 0; i < palabraElegida.length; i++){
+        if(letrasAcertadas[i]){
+            resultado += palabraElegida[i];
+        }else{
+            resultado += "_";
+        }
+        if(i < palabraElegida.length){
+            resultado += " ";
+        }
+    }
+    console.log(resultado);
+    return resultado;
+}
 
 function ElegirPalabra(){
-    // en esta version: basarse en el string precargado "listaPalabrasPosibles" y 
-    // devolver una al azar valiendose de genRndInteger que devuelve un numero al azar entre min y max ambos incluidos
+    return listaPalabrasPosibles[getRndInteger(0, listaPalabrasPosibles.length)];
 }
 
 function getRndInteger(min, max) {
