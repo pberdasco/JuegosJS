@@ -1,51 +1,70 @@
 const listaPalabrasPosibles = ["murcielago", "marsupial", "helicoptero", "automata", "hiperbola", "legumbre", "uniforme", "entrepiso"]; 
 let palabraElegida;
-let letrasAcertadas;
+let letrasAcertadas = [];
+
+const MAX_ERRORES = 6;
+let errores = 0;
 
 function ResetAhorcado(){
+    MostrarOcultarHombre(false);
+    TextoFin(0);
+
     palabraElegida = ElegirPalabra();
     letrasAcertadas = InicializarLetrasAcertadas(); 
     
-    JugarAhorcado();    
+    DisplayPalabra(PalabraVisible()); 
+    SetFocusOnLetra(); 
 }
 
-function JugarAhorcado(){
-    const MAX_ERRORES = 7;
-    let errores = 0;
-
-    do { 
-        let mostrar = PalabraVisible();
-        DisplayPalabra(mostrar); 
-
-        letra = prompt("Ingrese una letra").toLocaleUpperCase();
-
-        acertada = ValidarLetraIngresada(letra);
-        console.log(`acertada ${acertada}`);
-        if(acertada === 0){
-            MostrarHorca(errores);
-            errores++;
-        }
-    } while(errores < MAX_ERRORES && acertada !== 2)
-
-    console.log("Ganaste");
+function LetraRecibida(letra){
+    BorraLetra();
+    acertada = ValidarLetraIngresada(letra);
+    if(acertada === 0){
+        MostrarHorca(errores); 
+        errores++;
+    }else{
+        DisplayPalabra(PalabraVisible());
+    }
+    if(errores >= MAX_ERRORES || acertada === 2){
+        TextoFin(acertada === 2 ? 2 : 1);
+    }
 }
+
 
 function MostrarHorca(errores){
-    console.log(`Errores: ${errores}`);
+    switch (errores) {
+        case 0:
+            DibujoCabeza(true);
+            break;
+        case 1:
+            DibujoTronco(true);
+            break;
+        case 2:
+            DibujoBrazoIzq(true);
+            break;
+        case 3:
+            DibujoBrazoDer(true);
+            break;
+        case 4:
+            DibujoPiernaIzq(true);
+            break;
+        case 5:
+            DibujoPiernaDer(true);
+            break;
+        default:
+            break;
+    }
 }
 
 function ValidarLetraIngresada(letra){
-    // ademas devuelve:  0 si no encontro la letra
-    //                   1 si encontro la letra
-    //                   2 si encontro la letra pero ademas termino de acertar la palabra
+    // devuelve:  0 si no encontro la letra
+    //            1 si encontro la letra
+    //            2 si encontro la letra pero ademas termino de acertar la palabra
     let acertada = 0;
-    console.log("ingrese con letra: ", letra); 
     for(let i = 0; i < palabraElegida.length; i++){
-        console.log(letra, palabraElegida[i].toUpperCase())
-        if(letra === palabraElegida[i].toUpperCase()){
+        if(letra.toUpperCase() === palabraElegida[i].toUpperCase()){          
             letrasAcertadas[i] = true;
             acertada = 1; 
-            console.log(i,letra, palabraElegida[i], letrasAcertadas[i]); 
         }
     }
     if (PalabraCompleta()){
@@ -57,24 +76,22 @@ function ValidarLetraIngresada(letra){
 function PalabraCompleta(){
     resultado = true;
     for(let i = 0; i < letrasAcertadas.length; i++){
-        if(letrasAcertadas[i] = false){
+        if(letrasAcertadas[i] === false){
             resultado = false;
         }
     }
+    return resultado;
 }
 
 function InicializarLetrasAcertadas(){
-    const letrasAcertadas = [];
+    letrasAcertadas = [];
     for(let i = 1; i <= palabraElegida.length; i++){
         letrasAcertadas.push(false);
     }
-    return letrasAcertadas;
+    return letrasAcertadas; 
 }
 
 function PalabraVisible(){
-    console.log(letrasAcertadas);
-                
-    
     let resultado = "";
     for(let i = 0; i < palabraElegida.length; i++){
         if(letrasAcertadas[i]){
@@ -86,7 +103,6 @@ function PalabraVisible(){
             resultado += " ";
         }
     }
-    console.log(resultado);
     return resultado;
 }
 

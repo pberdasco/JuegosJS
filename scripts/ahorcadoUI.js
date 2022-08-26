@@ -6,9 +6,7 @@ const cssRoot = document.styleSheets[0].cssRules[0].style;
 const colorOculta = cssRoot.getPropertyValue('--main-color');  // oculta pintando del mismo color que main.
 
 
-
 function DisplayPalabra(palabra){
-    console.log(palabra);
     let espacioPalabra = document.getElementById("palabra");
     espacioPalabra.textContent = palabra;   
 }
@@ -54,7 +52,6 @@ function DibujoPiernaDer(muestra){
 }
 
 function MostrarOcultar(parte, muestra){
-    console.log("MostrarOcultar ", muestra);
     if (muestra) {
         parte.style.backgroundColor = colorMuestra;
     }else{
@@ -62,6 +59,29 @@ function MostrarOcultar(parte, muestra){
     }
 }
 
+function TextoFin(estado){
+    let resultado = document.getElementById("resultado");
+    if (estado === 2){
+        resultado.textContent = "G A N A S T E !!!";
+    }else if(estado === 1){
+        resultado.textContent = "Perdiste ... la palabra era: " + palabraElegida;
+    }else{
+        resultado.textContent = "";
+    }
+}
+
+//TODO:  trata de entender por que los de abajo no me funcionan
+
+function SetFocusOnLetra(){
+    console.log("focus");
+    document.getElementById("letraInput").focus();
+}
+
+function BorraLetra(){
+    let letra = document.getElementById("letraInput"); 
+    letra.textContent="";
+    letra.innerText="";
+}
 /*
 Opciones para asignar el valor
     espacioTexto.innerText = "Texto a imprimir - true";

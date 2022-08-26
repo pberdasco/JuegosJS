@@ -22,6 +22,7 @@
         <nav>
             <ul>
                 <li><button class="botonNav" type="button" onclick="CargarPagina('./ahorcado.html')" id="btnAhorcado">Ahorcado</button></li>
+                <li><button class="botonNav" type="button" onclick="CargarPagina('./batallanaval.html')" id="btnBatalla">Batalla Navval</button></li>
                 <li><button class="botonNav" type="button" onclick="CargarPagina('./index.html')" id="btnSimon">Pagina Principal</button></li>
             </ul>
         </nav>
@@ -30,26 +31,39 @@
                 <h3 id="texto">Ahorcado</h3>
             </section>
             <section class="recuadros espacioJuego">
-                <div class="espacioPalabra">
-                    <h2 id="palabra" class="palabra"></h2>
+                <div class="ingresos">
+                    <div>
+                        <label id="letraLabel">Ingrese una letra:</label>
+                        <input type="text" id="letraInput" value="" maxlength="1" size="1" onchange="LetraRecibida(this.value)">
+                    </div>
                     <button class="botonStart" type="button" onclick="ResetAhorcado()" id="btnStart">Reiniciar</button>
                 </div>
+                <div class="espacioPalabra">
+                    
+                    <h2 id="palabra" class="palabra"></h2>
+                    
+                </div>
                 <div id="espacioHorca">
-                    <div id="bloque">
-                        <div id="antesCabeza"></div>
-                        <div id="cabeza"></div>
+                    <div>
+                        <div id="bloque">
+                            <div id="antesCabeza"></div>
+                            <div id="cabeza"></div>
+                        </div>
+                        <div id="bloque">
+                            <div id="brazoIzq"></div>
+                            <div id="cuerpo"></div>
+                            <div id="brazoDer"></div>
+                        </div>
+                        <div id="bloque">
+                            <div id="antesPiernas"></div>
+                            <div id="piernaIzq"></div>
+                            <div id="interPiernas"></div>
+                            <div id="piernaDer"></div>
+                        </div>
                     </div>
-                    <div id="bloque">
-                        <div id="brazoIzq"></div>
-                        <div id="cuerpo"></div>
-                        <div id="brazoDer"></div>
-                    </div>
-                    <div id="bloque">
-                        <div id="antesPiernas"></div>
-                        <div id="piernaIzq"></div>
-                        <div id="interPiernas"></div>
-                        <div id="piernaDer"></div>
-                    </div>
+                </div>
+                <div class="espacioPalabra">
+                    <h2 id="resultado" class="resultado"></h2>
                 </div>
             </section>
             
@@ -60,10 +74,10 @@
         <p>CoderHouse - Berdasco - JavaScript - Ejercicios</p>
     </footer>
 
-    <!--
+    
     <script>
-        ResetAhorcado();
+        ResetAhorcado() 
     </script>
--->
+
 </body>
 </html>

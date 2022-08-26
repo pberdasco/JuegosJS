@@ -96,10 +96,23 @@ main{
     background-color: var(--nav-color);
 }
 
+.ingresos{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#letraInput{
+    background-color: var(--nav-color);
+    color: white;
+    margin-left: .5rem;
+    text-align: center;
+}
+
 .espacioPalabra{
     margin-top: 2rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .palabra{
@@ -108,6 +121,12 @@ main{
 }
 
 /* --- Dibujo ahorcado --- */
+#espacioHorca{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2rem;
+}
+
 #bloque{
     display: flex;
 }
