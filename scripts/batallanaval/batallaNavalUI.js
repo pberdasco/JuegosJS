@@ -39,5 +39,21 @@ function PintarCoordenadas(celdas, maxX, maxY){
         celdas[i][0].style.backgroundColor = "black";
         celdas[i][0].style.color = "white";
     }
-    celdas[4][6].style.backgroundColor = "brown";
+}
+
+function dibujarBarco(barco, celdas){
+    let pos1 = barco.Ubicacion.Posicion1;
+    let pos2 = barco.Ubicacion.Posicion2;
+    let estadoIndex = 0;
+    for (x = pos1.x; x <= pos2.x; x++){
+        for(y = pos1.y; y <= pos2.y; y++){
+            celdas[x][y].textContent = barco.id.toString();
+            if(barco.Estado[estadoIndex]){
+                celdas[x][y].style.backgroundColor = "red";
+            }else{
+                celdas[x][y].style.backgroundColor = "green";
+            }
+            estadoIndex++;
+        }
+    }
 }
