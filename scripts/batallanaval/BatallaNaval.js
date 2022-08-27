@@ -25,7 +25,7 @@ class Ubicacion{
 
     // Agregada despues de mandar el ejercicio
     Largo(){
-    // Devuelve la longitud de la Ubicacion
+    // Devuelve la longitud de la Ubicacion o -1 si es una ubicacion en diagonal
         let largoX = this.Posicion2.x - this.Posicion1.x;
         let largoY = this.Posicion2.y - this.Posicion1.y;
         if (largoX !== 0 && largoY !== 0){
@@ -54,60 +54,64 @@ class TipoBarco {
     id = 0;
     tipo = "";
     longitud = 0;
-    constructor(tipo, longitud){
+    cantidadAdmitida = 0;
+    constructor(tipo, longitud, cantidad){
         this.tipo = tipo;
         if(longitud > 0){
             this.longitud = longitud;
         }
+        this.cantidadAdmitida = cantidad;
         this.id = TipoBarco.numero++;
     }
 
-    LongitudValida(ubicacion){
-        // recibe una ubicacion y devuelve true si corresponde con la longitud de este tipo de barco
-        // por ejemlo recibe {{3,4},{3,5}} y la longitud de este barco es 2 => true si la longitud no es 2 => false        
-        let longX = ubicacion.Posicion2.x - ubicacion.Posicion1.x + 1;
-        let longY = ubicacion.Posicion2.y - ubicacion.Posicion1.y + 1;
-        if((longX === 1 && longY === this.longitud) || (longX === this.longitud && longY === 1)) {
-            return true;
-        } else{
-            return false;
-        }
-        
-        // opcion con nueva Ubicacion.Largo
-        return ubicacion.Largo() === this.longitud;
-
-
-        //fin resulucion PB
-        return true;
-    }
+    // recibe una ubicacion y devuelve true si corresponde con la longitud de este tipo de barco
+    // por ejemlo recibe {{3,4},{3,5}} y la longitud de este barco es 2 => true si la longitud no es 2 => false 
+    LongitudValida = (ubicacion) => ubicacion.Largo() === this.longitud
 }
-const TiposBarco = [new TipoBarco("Submarino", 1), new TipoBarco("Corbeta", 2), new TipoBarco("Fragata", 3), new TipoBarco("Destructor", 4), new TipoBarco("Portaaviones", 5)]
+
+const TiposBarco = [new TipoBarco("Submarino", 1, 3), new TipoBarco("Corbeta", 2, 2), new TipoBarco("Fragata", 3, 1), new TipoBarco("Destructor", 4, 1), new TipoBarco("Portaaviones", 5, 1)]
 
 class Barco {
-    static numero =0;
+    static numeroHombre =0;
+    static numeroMaquina =0;
     id = 0;
     TipoId = 0;
     Ubicacion = 0;
+    Jugador = 0;
     Estado = [];
-    constructor(tipoId, tipo, ubicacion, tableroLogico){
+    constructor(tipoId, ubicacion, tableroLogico, jugador, tipoEnTexto=""){
         if (ubicacion.EsValida(tableroLogico)){
-            if(tipoId > 0){
+            if(tipoId >= 0){
                 this.TipoId = tipoId;
             }else{
-                this.TipoId = BuscarID(tipo);
+                this.TipoId = Barco.#BuscarTipoId(tipoEnTexto);
             }
             this.Ubicacion = ubicacion;
             for(let i = 0 ; i < ubicacion.Largo() ; i++){
                 this.Estado.push(false);
-            } 
-            this.id = Barco.numero++;  
+            }
+            this.Jugador = jugador;
+            if (this.Jugador === 0){
+                this.id = Barco.numeroHombre++;  
+            }else{
+                this.id = Barco.numeroMaquina++;
+            }
+            
         }else{
             this.id = -1;  // implica que no se pudo crear.
         }         
     }
 
-    // Nuevos Tocado y Hundido
-    Tocado(posicion){
+    static #BuscarTipoId(tipoABuscar){
+        for(let i = 0; i < TiposBarco.length ; i++){
+            if(TiposBarco[i].tipo.toLowerCase() === tipoABuscar.toLowerCase()){
+                return TiposBarco[i].id;
+            }
+        }
+        return -1
+    }
+
+    MarcarTocado(posicion){
         let tocado = false;
         if(this.Ubicacion.Posicion1.x === this.Ubicacion.Posicion2.x && this.Ubicacion.Posicion1.x === posicion.x){
             this.Estado[posicion.y - this.Ubicacion.Posicion1.y] = true;
@@ -115,7 +119,9 @@ class Barco {
         }else if(this.Ubicacion.Posicion1.y === this.Ubicacion.Posicion2.y && this.Ubicacion.Posicion1.y === posicion.y){
             this.Estado[posicion.x - this.Ubicacion.Posicion1.x] = true;
             tocado = true;
-        }        
+        }  
+        return tocado;   
+        //TODO: revisar porque creo que funciona mal.      
     }
 
     Hundido(){
@@ -136,43 +142,25 @@ function CrearTableroLogico(){
     return tablero;
 }
 
-function BuscarID(tipo){
-    // recibe un tipo (por ejemplo Submarino) y debe decir que id tiene
-    // buscando en el array TiposBarco
-    let id = -1;
-    let pos = 0;
-    do{
-        if(TiposBarco[pos].tipo.toUpperCase() === tipo.toUpperCase()){
-            id = pos;
-        }
-        pos++;
-    }while(id === -1 && pos < TiposBarco.length)
 
-    return id;
-}
-
-function ValidarDisparo(diparo){
-    // debería recorrer todos los barcos del array Barcos y si el disparo pego en uno de ellos
-    // devolver el numero de barco
-    // si no, devolver -1 
-    let id = -1;
-    let pos = 0;
-    do{
-        if(Barcos[pos].Ubicacion.Posicion1.x === Barcos[pos].Ubicacion.Posicion2.x && Barcos[pos].Ubicacion.Posicion1.x === disparo.x){
-            if(disparo.y >= Barcos[pos].Ubicacion.Posicion1.y && disparo.y <= Barcos[pos].Ubicacion.Posicion2.y){
-                id = pos;
+function ValidarDisparo(arrayBarcos, posicionDisparo){
+    // Revisa en todos los barcos de arrayBarcos si un disparo efectuado en posiccionDisparo le pega
+    // si pega en un barco devuelve el numero de barco
+    // si no, devolver -1 (agua)
+    for (i= 0; i < arrayBarcos.length ; i++){
+        const ubicacionBarco = arrayBarcos[i].Ubicacion;
+        if(ubicacionBarco.Posicion1.x === ubicacionBarco.Posicion2.x && posicionDisparo.x === ubicacionBarco.Posicion1.x){
+            if(ubicacionBarco.Posicion1.y <= posicionDisparo.y && posicionDisparo.y <= ubicacionBarco.Posicion2.y){
+                return arrayBarcos[i].id;
             }
-        }else if(Barcos[pos].Ubicacion.Posicion1.y === Barcos[pos].Ubicacion.Posicion2.y && Barcos[pos].Ubicacion.Posicion1.y === disparo.y){
-            if(disparo.x >= Barcos[pos].Ubicacion.Posicion1.x && disparo.x <= Barcos[pos].Ubicacion.Posicion2.x){
-                id = pos;
+        }else if(ubicacionBarco.Posicion1.y === ubicacionBarco.Posicion2.y && posicionDisparo.y === ubicacionBarco.Posicion1.y){
+            if(ubicacionBarco.Posicion1.x <= posicionDisparo.x && posicionDisparo.x <= ubicacionBarco.Posicion2.x){
+                return arrayBarcos[i].id;
             }
         }
-        pos++;
-    }while(id === -1 && pos < Barcos.length)
-
-    return id;
+    }
+    return -1;
 }
-
 
 
 

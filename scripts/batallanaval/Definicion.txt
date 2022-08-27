@@ -1,0 +1,74 @@
+Objetos
+
+    Posicion
+        Define: un punto en un tablero
+        Atributos
+            x   (numero)
+            y   (numero)
+        Métodos
+            EnTablero(origen) => 
+                Indica si la posición esta dentro del tablero
+                origen (0,1) indica si el tablero se considera desde la posición (0,0) o desde (1,1)
+                Asume que todos los tableros tienen MAX_X y MAX_Y (columnas y filas)
+    
+    Ubicacion
+        Define: la posible ubicacion de un barco, indicada como: desde punto - hasta punto
+                las ubicaciones se definen de arriba a abajo y de izquierda a derecha
+        Atributos
+            Posicion1   (Posicion)  (desde)
+            Posicion2   (Posicion)  (hasta)
+        Métodos
+            Largo() =>
+                Indica cuantos casilleros ocupa la ubicacion (ej: {{3,4},{3,8}} => largo: 5 casilleros)
+            EsValida(tablero) =>
+                Recibe un array[][] que representa un tablero (0,0)-(MAX_X-1,MAX_Y-1)
+                Retorna: (true/false) si la Ubicacion es valida en tablero o no.
+                    - no debe pisar otro barco
+                    - no debe tocarse con otro barco si VALE_PEGADO = false
+                    - no debe salirse del tablero
+    
+    TipoBarco
+        Define: los distintos tipos de barco (y sus longitudes) que se pueden utilizar
+        Atributos
+            id                  (autonumerico)
+            tipo                (texto)         (nombre del tipo de barco, por ej: fragata)
+            longitud            (numero)        (cantidad de casilleros que ocupa)
+            cantidadAdmitida    (numero)        (cantidad de barcos de este tipo que debe incorporar cada jugador)
+        Métodos
+            LongitudValida(ubicacion) =>
+                Recibe: una Ubicacion
+                Retorna: (true/false) si la ubicacion se corresponde con la longitud que debe tener el tipo de barco
+
+    TiposBarco
+        Arreglo de TipoBarco
+        Define: a modo de parámetro, los tipos de barco que se podrán usar en el juego.
+
+    Barco
+        Define: un barco en un tablero
+        Atributos
+            id              (autonumerico)
+            TipoId          (numero)            (identificador del TipoBarco al que pertenece)
+            Ubicacion       (Ubicacion)         (desde - hasta)
+            jugador         (0/1)               (0=Humano, 1=Maquina)
+            Estado[]        (array de bool)     (1 posicion por cada casillero que ocupa el barco:  true = tocado, false = sano)
+        Constructor
+            constructor(tipoId, ubicacion, tableroLogico, jugador, tipoEnTexto="")
+                si tipoId < 0 y tipoEnTexto = a uno de los nombres de tipos de barcos, usa este ultimo para rescatar el id
+        Métodos
+            MarcarTocado(posicion) =>
+                Recibe: una posicion de un disparo
+                Devuelve: (true/false) si el disparo le pego al barco o no
+                Procesa: si el disparo le pego al barco, marca en el casillero correspondiente de Estado[] en true
+            Hundido() =>
+                Devuelve (true/false) si el barco esta hundido. (se basa en mirar Estado[])
+
+Funciones
+    CrearTableroLogico() =>
+        Devuelve: un array[][] de (0,0) a (MAX_X-1, MAX_Y-1) relleno de numeros 99
+        99 indica celda vacia.
+        =====Pendiente ver como se va a usar===== 
+             por ejemplo marcar disparos al agua, los barcos, etc
+    
+    ValidarDisparo(arrayBarcos, posicionDisparo) =>
+        Recibe: un array de Barco y una Posicion de disparo
+        Devuelve: el id de un barco (de los incluidos en el array) si el disparo impacta en él o -1 si el disparo es Agua
