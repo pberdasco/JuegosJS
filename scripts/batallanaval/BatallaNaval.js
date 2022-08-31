@@ -129,7 +129,9 @@ class Barco {
     }
 }
 
-
+function PosLN(letra, numero){
+    return new Posicion(numero, letra.charCodeAt(0) - 65)
+}
 
 function CrearTableroLogico(){
     const tablero = [];

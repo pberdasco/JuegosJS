@@ -8,6 +8,7 @@ let errores = 0;
 function ResetAhorcado(){
     MostrarOcultarHombre(false);
     TextoFin(0);
+    errores = 0;
 
     palabraElegida = ElegirPalabra();
     letrasAcertadas = InicializarLetrasAcertadas(); 

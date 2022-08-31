@@ -79,6 +79,11 @@ main{
     min-height: 30rem;
 }
 
+.textoIndex{
+    font-size: 1.2rem;
+    margin: 1rem 10rem 0 10rem
+}
+
 
 /* ============================= Ahorcado ============================= */
 
@@ -179,6 +184,7 @@ main{
 /* =========================== Batalla Naval ========================= */
 
 .tableros{
+    padding-top: 1.5rem;
     display:flex;
     justify-content:space-around;
     align-items: center;
