@@ -7,12 +7,11 @@
     <title>Prueba JS</title>
 
     <link rel="stylesheet" href="./style.css">
-    <script src="./scripts/menu.js"></script>    <!-- Manejo de botones del menu : General -->
-    
+    <script src="./scripts/menu.js"></script>            <!-- Manejo de botones del menu : General -->   
 </head>
 <body>
     <header>
-        <h1>Juegos</h1>
+        <h1>Juegos</h1> 
     </header>
 
     <div class="cuerpo">
@@ -20,28 +19,36 @@
             <ul>
                 <li><button class="botonNav" type="button" onclick="CargarPagina('./ahorcado.html')" id="btnAhorcado">Ahorcado</button></li>
                 <li><button class="botonNav" type="button" onclick="CargarPagina('./batallanaval.html')" id="btnBatalla">Batalla Navval</button></li>
-                <li><button class="botonNav" type="button" onclick="CargarPagina('./frogger.html')" id="btnFrog">Frogger</button></li>
                 <li><button class="botonNav" type="button" onclick="CargarPagina('./index.html')" id="btnSimon">Pagina Principal</button></li>
             </ul>
         </nav>
         <main class="areaTrabajo">
             <section class="recuadros tituloJuego">
-                <h2 id="texto">Pagina principal</h2>
+                <h2 id="texto">Frogger</h2>
             </section>
             <section class="recuadros espacioJuego">
-                <p class="textoIndex">Es un sitio donde se iran agregando juegos que permitan aplicar en su desarrollo todos los conocimientos que se reciban en el curso de JavaScript de CoderHouse</p>
-                <p class="textoIndex">El propio MENU, es el primer sitio donde se aplica el llamado a funciones (que cargan las paginas específicas de los juegos)</p>
-                <p class="textoIndex">El juego del AHORCADO pretende mostrar el uso de funciones y arrays. Si bien usa DOM no se trabajo especificamente en eso</p>
-                <p class="textoIndex">La BATALLA NAVAL agrega ademas de las funciones y vectores el uso de Clases y Objetos</p>
+                <div class="">
+                    <table id="rutaFrogger">
+
+                    </table>
+                </div>
+                
             </section>
-
-
+            
         </main>
     </div>
     
     <footer>
         <p>CoderHouse - Berdasco - JavaScript - Ejercicios</p>
     </footer>
+
+    
+    <script src="./scripts/frogger/froggerFunc.js"></script>
+    <script>
+        crearRuta(8, 100);
+    </script>
+
+      
 
 </body>
 </html>

@@ -197,6 +197,14 @@ main{
     height: 1rem;
 }
 
+/* ============================== Frogger ============================ */
+
+.celdaFrogger{
+    width: .4rem;
+    height: 1rem;
+    border: 1px solid black;
+}
+
 /* =========================== Prueba Grilla ========================= */
 
 .box{
