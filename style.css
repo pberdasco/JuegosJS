@@ -198,11 +198,14 @@ main{
 }
 
 /* ============================== Frogger ============================ */
+#rutaFrogger{
+    border-spacing:0;
+    border: 1px solid black;
+}
 
 .celdaFrogger{
     width: .4rem;
     height: 1rem;
-    border: 1px solid black;
 }
 
 .rana{
@@ -215,6 +218,10 @@ main{
 
 .colectivo{
     background-color: yellow;
+}
+
+.moto{
+    background-color: goldenrod;
 }
 
 

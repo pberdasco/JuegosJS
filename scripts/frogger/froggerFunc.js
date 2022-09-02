@@ -1,5 +1,8 @@
 const LINEAS = 8;
 const COLUMNAS = 100;
+let ticks = 0;
+let speed = 50;
+let timmerID;
 
 const celdasElementos = crearRuta(LINEAS, COLUMNAS);
 let rana;
@@ -36,17 +39,22 @@ class Rana{
 function ResetFrogger(){
     
     rana = new Rana(LINEAS, COLUMNAS / 2);
-    listaVehiculos = [new Vehiculo(1,95,1,1,"auto"), new Vehiculo(3,80,1,3,"colectivo"), new Vehiculo(1,50,1,2,"auto")];
+    listaVehiculos = [new Vehiculo(1,95,2,2,"auto"), 
+                      new Vehiculo(2,80,4,3,"colectivo"), 
+                      new Vehiculo(3,50,2,3,"auto"), 
+                      new Vehiculo(3,70,1,1,"moto"), 
+                      new Vehiculo(4,30,-1,2,"moto"), 
+                      new Vehiculo(5,80,1,1,"moto"), 
+                      new Vehiculo(5,20,-3,4,"colectivo")];
 
     document.addEventListener("keydown", moverRana);
-    /*
+   
+    timmerID = setInterval(moverVehiculos, speed);
+    // ver donde poner:
+    // clearInterval(timmerID);
+    // quizas con un boton de parar / arrancar
 
-
-    document.addEventListener("keydown", noverFrog);
-    let timmerID = setInterval(moverObjetos, 1000);
-
-    console.log(objetosRojos, objetosVerdes);  
-    */
+ 
 }
 
 
@@ -130,48 +138,47 @@ function moverRana(e){
             break;
     }
     pintarCeldas(rana.Clase, rana.Fila, rana.Columna, 1);
-    console.log(rana);
 }
 
-/*
+function moverVehiculos(){
+    ticks++;
+    for(let i = 0; i < listaVehiculos.length; i++){
+        if(ticks % listaVehiculos[i].Velocidad === 0){
+            despintarCeldas(listaVehiculos[i].Clase, listaVehiculos[i].Fila, listaVehiculos[i].Columna, listaVehiculos[i].Largo);
+            if (listaVehiculos[i].Velocidad > 0){
+                listaVehiculos[i].Columna--;
+                if (listaVehiculos[i].Columna < 0){
+                    listaVehiculos[i].Columna = COLUMNAS - listaVehiculos[i].Largo;
+                }
+            }else{
+                listaVehiculos[i].Columna++;
+                if (listaVehiculos[i].Columna > COLUMNAS - listaVehiculos[i].Largo){
+                    listaVehiculos[i].Columna = 0;
+                }
+            }           
+            pintarCeldas(listaVehiculos[i].Clase, listaVehiculos[i].Fila, listaVehiculos[i].Columna, listaVehiculos[i].Largo);
+            evaluarColision(listaVehiculos[i]);
 
-function evaluarColision(timmerID){
-    if (true){
+        }
+    }    
+}
+
+
+function evaluarColision(vehiculo){
+    if (vehiculo.Fila === rana.Fila && (vehiculo.Columna >= rana.Columna && vehiculo.Columna + vehiculo.Largo <= rana.Columna)){
         clearInterval(timmerID);
-        console.log("Perdiste")
+        alert("Perdiste")
     }
     
 }
 
-function eliminaClases(lineasTransito, columnas){
-    for(let i= 0; i < lineasTransito; i++){
-        for(let j= 0; j < columnas; j++){
-            element.classList.remove("celdaVerde", "celdaRoja");          
-        }
-    }   
-}
-
-function moverObjetos(listaObjetos){
-    for(i = 0; i < listaObjetos.length; i++ ){
-        listaObjetos[i].c -= listaObjetos[i].v;
-        if (listaObjetos[i].c < 0) {
-            listaObjetos[i].c = 100;
-        }
+/*
+startPauseButton.addEventListener("click", () => {
+    if (timmerID) {
+        clearInterval(timmerID)
+    }else{
+        timmerID = setInterval(moverVehiculos, speed);
+        document.addEventListener("keydown", moverRana);
     }
-}
-
-function pintarCeldas(arrayElementos, listaObjetos, clase){
-    for(i = 0; i < listaObjetos.length; i++ ){
-        arrayElementos[listaObjetos[i].f][listaObjetos[i].c].classList.add(clase);
-        console.log(clase, listaObjetos[i].f,listaObjetos[i].c)
-    }        
-}
-
-function moverObjetos(){
-    pintarCeldas(celdasElementos, objetosVerdes, "celdaVerde");
-    pintarCeldas(celdasElementos, objetosRojos, "celdaRoja");
-    moverObjetos(objetosVerdes);
-    moverObjetos(objetosRojos);    
-    eliminaClases(LINEAS,COLUMNAS);        
-}
+})
 */
