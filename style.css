@@ -205,6 +205,20 @@ main{
     border: 1px solid black;
 }
 
+.rana{
+    background-color: green;
+}
+
+.auto{
+    background-color: black;
+}
+
+.colectivo{
+    background-color: yellow;
+}
+
+
+
 /* =========================== Prueba Grilla ========================= */
 
 .box{
