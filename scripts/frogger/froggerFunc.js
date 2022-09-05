@@ -165,7 +165,11 @@ function moverVehiculos(){
 
 
 function evaluarColision(vehiculo){
-    if (vehiculo.Fila === rana.Fila && (vehiculo.Columna >= rana.Columna && vehiculo.Columna + vehiculo.Largo <= rana.Columna)){
+    if(vehiculo.Fila === rana.Fila){
+        console.log(vehiculo.Columna, vehiculo.Columna + vehiculo.Largo, "->", rana.Columna);
+    }
+
+    if (vehiculo.Fila === rana.Fila && (vehiculo.Columna <= rana.Columna && vehiculo.Columna + vehiculo.Largo >= rana.Columna)){
         clearInterval(timmerID);
         alert("Perdiste")
     }
