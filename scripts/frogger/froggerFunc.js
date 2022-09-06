@@ -3,6 +3,7 @@ const COLUMNAS = 100;
 let ticks = 0;
 let speed = 50;
 let timmerID;
+let stopped = true;
 
 const celdasElementos = crearRuta(LINEAS, COLUMNAS);
 let rana;
@@ -43,23 +44,29 @@ function ResetFrogger(){
                       new Vehiculo(2,80,4,3,"colectivo"), 
                       new Vehiculo(3,50,2,3,"auto"), 
                       new Vehiculo(3,70,1,1,"moto"), 
+                      new Vehiculo(3,30,-1,1,"moto"),
                       new Vehiculo(4,30,-1,2,"moto"), 
                       new Vehiculo(5,80,1,1,"moto"), 
-                      new Vehiculo(5,20,-3,4,"colectivo")];
+                      new Vehiculo(5,20,-3,4,"colectivo"),
+                      new Vehiculo(6,20,-2,4,"colectivo"),
+                      new Vehiculo(6,50,1,1,"moto"),
+                      new Vehiculo(6,70,1,1,"moto"),
+                      new Vehiculo(7,70,-1,1,"moto")];
 
     document.addEventListener("keydown", moverRana);
    
     timmerID = setInterval(moverVehiculos, speed);
-    // ver donde poner:
-    // clearInterval(timmerID);
-    // quizas con un boton de parar / arrancar
-
- 
+    stopped = false; 
 }
 
-
-
-
+function StartStopFrogger(){
+    if (stopped) {
+        ResetFrogger()
+    }else{
+        clearInterval(timmerID);
+        stopped = true;
+    }
+}
 
 
 // Crear Ruta: agrega en el html una grilla con tantas TR como lineas de transito se requieran y

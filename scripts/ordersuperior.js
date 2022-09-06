@@ -60,6 +60,9 @@ function f3(elemento, indice){
 //llamando con una funcion predefinida y nominada
 arrayTest.forEach(f3);
 
+console.log(document.body);
+console.dir(document.body);
+
 
 
 

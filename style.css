@@ -84,9 +84,6 @@ main{
     margin: 1rem 10rem 0 10rem
 }
 
-
-/* ============================= Ahorcado ============================= */
-
 .botonStart{
     margin: .5rem;
     padding: .5rem;
@@ -100,6 +97,9 @@ main{
 .botonStart:hover{
     background-color: var(--nav-color);
 }
+
+/* ============================= Ahorcado ============================= */
+
 
 .ingresos{
     display: flex;
@@ -198,6 +198,19 @@ main{
 }
 
 /* ============================== Frogger ============================ */
+.areaJuegoFrogger{
+    margin-top: 3rem;
+    display: flex;
+}
+
+.espacio{
+    width: 25%;
+}
+
+.juegoFrogger{
+    width: 50%;
+}
+
 #rutaFrogger{
     border-spacing:0;
     border: 1px solid black;
