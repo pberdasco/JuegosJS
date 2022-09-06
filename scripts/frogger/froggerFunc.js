@@ -1,14 +1,14 @@
 const LINEAS = 8;
 const COLUMNAS = 100;
-let NIVEL = 1;
+let nivel = 1;
 let ticks = 0;
 let speed = 50;
 let timmerID;
 let stopped = true;
 
 const ganastePerdiste = document.getElementById("resultado");
-const celdasElementos = crearRuta(LINEAS, COLUMNAS);
 const elementoNivel = document.getElementById("nivel");
+const celdasElementos = CrearRuta(LINEAS, COLUMNAS);
 let listaVehiculos = [];
 let rana;
 
@@ -24,7 +24,7 @@ class Vehiculo{
         this.Velocidad = velocidad,
         this.Largo = largo,
         this.Clase = clase
-        pintarCeldas(this.Clase, this.Fila, this.Columna, this.Largo)
+        PintarCeldas(this.Clase, this.Fila, this.Columna, this.Largo)
     }
 }
 
@@ -35,21 +35,20 @@ class Rana{
     constructor(fila, columna){
         this.Columna = columna;
         this.Fila = fila;
-        pintarCeldas(this.Clase, this.Fila, this.Columna, 1)
+        PintarCeldas(this.Clase, this.Fila, this.Columna, 1)
     }
 }
 
 
 function ResetFrogger(){
-    ganastePerdiste.textContent = "";
-    LimpiarRuta();
-    elementoNivel.textContent = `Nivel: ${NIVEL}`;
+    LimpiarHTMLnuevoNivel()
+
     rana = new Rana(LINEAS, COLUMNAS / 2);
     CrearVehiculos();
 
-    document.addEventListener("keydown", moverRana);
+    document.addEventListener("keydown", MoverRana);
    
-    timmerID = setInterval(moverVehiculos, speed);
+    timmerID = setInterval(MoverVehiculos, speed);
     stopped = false; 
 }
 
@@ -66,7 +65,7 @@ function StartStopFrogger(){
 // Crear Ruta: agrega en el html una grilla con tantas TR como lineas de transito se requieran y
 //  tantas TD como se defina en ancho.
 // Además de agregarlo en el html, devuelve un array[][] que contiene todos los elementos td que se crearon.
-function crearRuta(lineasTransito, ancho){
+function CrearRuta(lineasTransito, ancho){
     const ruta = document.querySelector("#rutaFrogger");
     ruta.textContent = "";
     const celdas = [];
@@ -98,7 +97,7 @@ function CreateTD(linea, i){
 }
 
 
-function pintarCeldas(clase, fila, columna, largo){
+function PintarCeldas(clase, fila, columna, largo){
     for (let i= 0; i < largo; i++){
         if (fila-1 < LINEAS && fila-1 >= 0 && columna-1+i < COLUMNAS && columna-1+i >= 0){
             celdasElementos[fila-1][columna-1+i].classList.add(clase);
@@ -106,7 +105,7 @@ function pintarCeldas(clase, fila, columna, largo){
     }
 }
 
-function despintarCeldas(clase, fila, columna, largo){
+function DespintarCeldas(clase, fila, columna, largo){
     for (let i= 0; i < largo; i++){
         if (fila-1 < LINEAS && fila-1 >= 0 && columna-1+i < COLUMNAS && columna-1+i >= 0){
             celdasElementos[fila-1][columna-1+i].classList.remove(clase);
@@ -114,20 +113,24 @@ function despintarCeldas(clase, fila, columna, largo){
     }
 }
  
+function LimpiarHTMLnuevoNivel(){
+    ganastePerdiste.textContent = "";
+    LimpiarRuta();
+    elementoNivel.textContent = `Nivel: ${nivel}`;
+}
+
 function LimpiarRuta(){
     for(let i = 0; i < listaVehiculos.length; i++){
-        despintarCeldas(listaVehiculos[i].Clase, listaVehiculos[i].Fila, listaVehiculos[i].Columna, listaVehiculos[i].Largo);
+        DespintarCeldas(listaVehiculos[i].Clase, listaVehiculos[i].Fila, listaVehiculos[i].Columna, listaVehiculos[i].Largo);
     }
-
     if (rana){
-        despintarCeldas(rana.Clase, rana.Fila, rana.Columna, 1);
-    }
-    
+        DespintarCeldas(rana.Clase, rana.Fila, rana.Columna, 1);
+    }  
 }
 
 
-function moverRana(e){
-    despintarCeldas(rana.Clase, rana.Fila, rana.Columna, 1);
+function MoverRana(e){
+    DespintarCeldas(rana.Clase, rana.Fila, rana.Columna, 1);
     switch (e.key){
         case "ArrowLeft" :       
             if (rana.Columna > 1){
@@ -152,17 +155,15 @@ function moverRana(e){
         default : 
             break;
     }
-    pintarCeldas(rana.Clase, rana.Fila, rana.Columna, 1);
-    evaluarVictoria(rana);
+    PintarCeldas(rana.Clase, rana.Fila, rana.Columna, 1);
+    EvaluarVictoria(rana);
 }
  
-
-
-function moverVehiculos(){
+function MoverVehiculos(){
     ticks++;
     for(let i = 0; i < listaVehiculos.length; i++){
         if(ticks % listaVehiculos[i].Velocidad === 0){
-            despintarCeldas(listaVehiculos[i].Clase, listaVehiculos[i].Fila, listaVehiculos[i].Columna, listaVehiculos[i].Largo);
+            DespintarCeldas(listaVehiculos[i].Clase, listaVehiculos[i].Fila, listaVehiculos[i].Columna, listaVehiculos[i].Largo);
             if (listaVehiculos[i].Velocidad > 0){
                 listaVehiculos[i].Columna--;
                 if (listaVehiculos[i].Columna < 0){
@@ -174,31 +175,30 @@ function moverVehiculos(){
                     listaVehiculos[i].Columna = 0;
                 }
             }           
-            pintarCeldas(listaVehiculos[i].Clase, listaVehiculos[i].Fila, listaVehiculos[i].Columna, listaVehiculos[i].Largo);
-            evaluarColision(listaVehiculos[i]);
-
+            PintarCeldas(listaVehiculos[i].Clase, listaVehiculos[i].Fila, listaVehiculos[i].Columna, listaVehiculos[i].Largo);
+            EvaluarColision(listaVehiculos[i]);
         }
     }    
 }
-   
-                                    
-function evaluarColision(vehiculo){
+                                      
+function EvaluarColision(vehiculo){
     if (vehiculo.Fila === rana.Fila && (vehiculo.Columna <= rana.Columna && vehiculo.Columna + vehiculo.Largo >= rana.Columna)){
-        clearInterval(timmerID);
-        document.removeEventListener("keydown", moverRana);
-        ganastePerdiste.textContent = "Perdiste !!!";
-        stopped = true;
+        FinNivel("Perdiste !!!")
     }
 }
 
-function evaluarVictoria(rana){
+function EvaluarVictoria(rana){
     if (rana.Fila === 1){
-        clearInterval(timmerID);
-        document.removeEventListener("keydown", moverRana);
-        ganastePerdiste.textContent = "Ganaste !!!";
-        stopped = true;
-        NIVEL++;
+        FinNivel("Ganaste !!!")
+        nivel++;
     }
+}
+
+function FinNivel(mensaje){
+    clearInterval(timmerID);
+    document.removeEventListener("keydown", MoverRana);
+    ganastePerdiste.textContent = mensaje;
+    stopped = true;
 }
 
 function CrearVehiculos(){
@@ -213,13 +213,12 @@ function CrearVehiculos(){
     new Vehiculo(6,50,1,1,"moto"),
     new Vehiculo(6,70,1,1,"moto"),
     new Vehiculo(7,70,-1,1,"moto")];
-    if (NIVEL > 1){
+    if (nivel > 1){
         listaVehiculos.push(new Vehiculo(4,50,-1,1,"auto")); 
         listaVehiculos.push(new Vehiculo(4,20,2,5,"colectivo"));
         listaVehiculos.push(new Vehiculo(5,70,-1,2,"moto"));
     }
-    if (NIVEL > 2 && NIVEL <= 5){
+    if (nivel > 2 && nivel <= 5){
         speed = speed * .8;
-    }
-    
+    }   
 }
