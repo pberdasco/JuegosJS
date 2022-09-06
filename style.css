@@ -211,14 +211,28 @@ main{
     width: 50%;
 }
 
+.flexible{
+    display: flex;
+    justify-content: space-between;
+}
+
+#nivel{
+    margin: .8rem;
+    padding-top: .3rem;
+}
+
 #rutaFrogger{
     border-spacing:0;
     border: 1px solid black;
 }
 
 .celdaFrogger{
-    width: .4rem;
+    width: .6rem;
     height: 1rem;
+}
+
+.celdaCasa{
+    background-color: var(--nav-color);
 }
 
 .rana{

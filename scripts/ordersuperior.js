@@ -65,5 +65,10 @@ console.dir(document.body);
 
 
 
+//=========================  Algo de DOM
+let divs = document.getElementsByTagName("div");  // devuelve una lista de elementos
+for ( const oneDiv of divs){
+    console.log(oneDiv.innerHTML);
+}
 
 
