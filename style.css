@@ -216,7 +216,7 @@ main{
     justify-content: space-between;
 }
 
-#nivel{
+#nivel, #vehiculos, #tiempo{
     margin: .8rem;
     padding-top: .3rem;
 }

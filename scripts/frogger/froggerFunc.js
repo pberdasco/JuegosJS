@@ -4,10 +4,16 @@ let nivel = 1;
 let ticks = 0;
 let speed = 50;
 let timmerID;
+let segundosID;
+let segundos = 0;
 let stopped = true;
+let cambiaNivel = true;
+
 
 const ganastePerdiste = document.getElementById("resultado");
 const elementoNivel = document.getElementById("nivel");
+const elementoVehiculos = document.getElementById("vehiculos");
+const elementoTiempo = document.getElementById("tiempo");
 const celdasElementos = CrearRuta(LINEAS, COLUMNAS);
 let listaVehiculos = [];
 let rana;
@@ -46,19 +52,39 @@ function ResetFrogger(){
     rana = new Rana(LINEAS, COLUMNAS / 2);
     CrearVehiculos();
 
-    document.addEventListener("keydown", MoverRana);
-   
-    timmerID = setInterval(MoverVehiculos, speed);
-    stopped = false; 
 }
 
 function StartStopFrogger(){
     if (stopped) {
-        ResetFrogger()
+        if (cambiaNivel){
+            ResetFrogger();
+            if (nivel === 1){
+                segundos = 0;
+                segundosID = setInterval(sumaUnSegundo, 1000);
+            }
+        }
+        StartFrogger()
     }else{
-        clearInterval(timmerID);
-        stopped = true;
+        StopFrogger();
+        cambiaNivel = false;
     }
+}
+
+function StartFrogger(){
+    document.addEventListener("keydown", MoverRana);   
+    timmerID = setInterval(MoverVehiculos, speed);
+    stopped = false;
+}
+
+function StopFrogger(){
+    clearInterval(timmerID);
+    document.removeEventListener("keydown", MoverRana);
+    stopped = true;
+}
+
+function sumaUnSegundo(){
+    segundos++;
+    elementoTiempo.textContent = `Tiempo: ${segundos}`;
 }
 
 
@@ -126,7 +152,7 @@ function LimpiarRuta(){
     if (rana){
         DespintarCeldas(rana.Clase, rana.Fila, rana.Columna, 1);
     }  
-}
+}  
 
 
 function MoverRana(e){
@@ -183,35 +209,38 @@ function MoverVehiculos(){
                                       
 function EvaluarColision(vehiculo){
     if (vehiculo.Fila === rana.Fila && (vehiculo.Columna <= rana.Columna && vehiculo.Columna + vehiculo.Largo >= rana.Columna)){
-        FinNivel("Perdiste !!!")
+        FinNivel("Perdiste !!!");
+        StopFrogger();
+        nivel = 1;
+        speed = 50;
+        clearInterval(segundosID);
     }
 }
 
 function EvaluarVictoria(rana){
     if (rana.Fila === 1){
-        FinNivel("Ganaste !!!")
+        FinNivel("Ganaste !!!");
         nivel++;
     }
 }
 
 function FinNivel(mensaje){
-    clearInterval(timmerID);
-    document.removeEventListener("keydown", MoverRana);
+    StopFrogger();
     ganastePerdiste.textContent = mensaje;
-    stopped = true;
+    cambiaNivel = true;
 }
 
 function CrearVehiculos(){
     listaVehiculos = [new Vehiculo(2,80,4,3,"colectivo"), 
     new Vehiculo(3,50,2,3,"auto"), 
     new Vehiculo(3,70,1,1,"moto"), 
-    new Vehiculo(3,30,-1,1,"moto"),
+    new Vehiculo(3,30,-1,1,"auto"),
     new Vehiculo(4,30,-1,2,"moto"), 
     new Vehiculo(5,80,1,1,"moto"), 
     new Vehiculo(5,20,-3,4,"colectivo"),
     new Vehiculo(6,20,-2,4,"colectivo"),
     new Vehiculo(6,50,1,1,"moto"),
-    new Vehiculo(6,70,1,1,"moto"),
+    new Vehiculo(6,70,1,1,"auto"),
     new Vehiculo(7,70,-1,1,"moto")];
     if (nivel > 1){
         listaVehiculos.push(new Vehiculo(4,50,-1,1,"auto")); 
@@ -221,4 +250,14 @@ function CrearVehiculos(){
     if (nivel > 2 && nivel <= 5){
         speed = speed * .8;
     }   
+    if (nivel > 5){
+        listaVehiculos.push(new Vehiculo(7,40,1,2,"auto")); 
+        listaVehiculos.push(new Vehiculo(4,80,2,5,"colectivo"));
+        listaVehiculos.push(new Vehiculo(7,60,1,1,"moto"));
+    }
+    if (nivel > 7){
+        listaVehiculos.push(new Vehiculo(getRndInteger(2,7),getRndInteger(1,80),1,getRndInteger(1,5),"auto")); 
+        listaVehiculos.push(new Vehiculo(getRndInteger(2,7),getRndInteger(1,80),2,getRndInteger(1,5),"colectivo"));    
+    }
+    elementoVehiculos.textContent = `Vehiculos: ${listaVehiculos.length}`;
 }

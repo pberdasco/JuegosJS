@@ -111,6 +111,3 @@ function ElegirPalabra(){
     return listaPalabrasPosibles[getRndInteger(0, listaPalabrasPosibles.length)];
 }
 
-function getRndInteger(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) ) + min;
-}

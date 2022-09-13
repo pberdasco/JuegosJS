@@ -70,8 +70,6 @@ function TextoFin(estado){
     }
 }
 
-//TODO:  trata de entender por que los de abajo no me funcionan
-
 function SetFocusOnLetra(){
     console.log("focus");
     document.getElementById("letraInput").focus();
@@ -79,14 +77,15 @@ function SetFocusOnLetra(){
 
 function BorraLetra(){
     let letra = document.getElementById("letraInput"); 
-    letra.textContent="";
-    letra.innerText="";
+    letra.value="";
 }
 /*
 Opciones para asignar el valor
     espacioTexto.innerText = "Texto a imprimir - true";
     espacioTexto.innerHTML = "<h3>Texto H3</h3>"
     espacioTexto.textContent = "";
+
+    si el campo es un input => letra.value = "";  
 }
 
 */
