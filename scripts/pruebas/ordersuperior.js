@@ -65,17 +65,7 @@ console.dir(document.body);
 
 
 
-//=========================  Algo de DOM
-let divs = document.getElementsByTagName("div");  // devuelve una lista de elementos
-for ( const oneDiv of divs){
-    console.log(oneDiv.innerHTML);
-}
 
-console.log("Menu NAV");
-const menuIndex = document.getElementsByTagName("ul");
-const nuevoBoton = document.createElement("li");
-nuevoBoton.innerHTML = `<button class="botonNav" type="button" onclick="" id="btnAgregado">Boton Nuevo</button>`
-menuIndex[0].append(nuevoBoton);
 
 
  
