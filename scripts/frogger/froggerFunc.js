@@ -29,8 +29,30 @@ class Vehiculo{
         this.Columna = columna,
         this.Velocidad = velocidad,
         this.Largo = largo,
-        this.Clase = clase
+        this.Clase = clase;
         PintarCeldas(this.Clase, this.Fila, this.Columna, this.Largo)
+    }
+
+    Avanzar = function(t){
+        if(t % this.Velocidad === 0){
+            this.Borrar();
+            this.#Mover();
+            PintarCeldas(this.Clase, this.Fila, this.Columna, this.Largo);
+        }
+    }
+
+    Borrar = function(){
+        DespintarCeldas(this.Clase, this.Fila, this.Columna, this.Largo);
+    }
+
+    #Mover = function(){
+        if (this.Velocidad > 0){
+            this.Columna--;
+            if (this.Columna < 0) this.Columna = COLUMNAS - this.Largo;            
+        }else{
+            this.Columna++;
+            if (this.Columna > COLUMNAS - this.Largo) this.Columna = 0;
+        } 
     }
 }
 
@@ -51,7 +73,6 @@ function ResetFrogger(){
 
     rana = new Rana(LINEAS, COLUMNAS / 2);
     CrearVehiculos();
-
 }
 
 function StartStopFrogger(){
@@ -147,7 +168,7 @@ function LimpiarHTMLnuevoNivel(){
 
 function LimpiarRuta(){
     for(let i = 0; i < listaVehiculos.length; i++){
-        DespintarCeldas(listaVehiculos[i].Clase, listaVehiculos[i].Fila, listaVehiculos[i].Columna, listaVehiculos[i].Largo);
+        listaVehiculos[i].Borrar();
     }
     if (rana){
         DespintarCeldas(rana.Clase, rana.Fila, rana.Columna, 1);
@@ -159,24 +180,16 @@ function MoverRana(e){
     DespintarCeldas(rana.Clase, rana.Fila, rana.Columna, 1);
     switch (e.key){
         case "ArrowLeft" :       
-            if (rana.Columna > 1){
-                rana.Columna--
-            }
+            if (rana.Columna > 1) rana.Columna--;
             break;
         case "ArrowRight" :
-            if (rana.Columna < COLUMNAS){
-                rana.Columna++
-            } 
+            if (rana.Columna < COLUMNAS) rana.Columna++;
             break;
         case "ArrowUp" :
-            if (rana.Fila > 1){
-                rana.Fila--
-            }
+            if (rana.Fila > 1) rana.Fila--;
             break;
         case "ArrowDown" :
-            if (rana.Fila < LINEAS){
-                rana.Fila++
-            }
+            if (rana.Fila < LINEAS) rana.Fila++;
             break;
         default : 
             break;
@@ -184,7 +197,8 @@ function MoverRana(e){
     PintarCeldas(rana.Clase, rana.Fila, rana.Columna, 1);
     EvaluarVictoria(rana);
 }
- 
+
+/*
 function MoverVehiculos(){
     ticks++;
     for(let i = 0; i < listaVehiculos.length; i++){
@@ -200,10 +214,19 @@ function MoverVehiculos(){
                 if (listaVehiculos[i].Columna > COLUMNAS - listaVehiculos[i].Largo){
                     listaVehiculos[i].Columna = 0;
                 }
-            }           
+            } 
+            listaVehiculos[i].Dibujar();          
             PintarCeldas(listaVehiculos[i].Clase, listaVehiculos[i].Fila, listaVehiculos[i].Columna, listaVehiculos[i].Largo);
-            EvaluarColision(listaVehiculos[i]);
         }
+    }    
+}
+*/
+
+function MoverVehiculos(){
+    ticks++;
+    for(let i = 0; i < listaVehiculos.length; i++){
+        listaVehiculos[i].Avanzar(ticks);          
+        EvaluarColision(listaVehiculos[i]);
     }    
 }
                                       
