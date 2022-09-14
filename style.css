@@ -98,6 +98,68 @@ main{
     background-color: var(--nav-color);
 }
 
+/* ============================ Modal Login =========================== */
+.login-button{
+    position: fixed;
+    right: 2rem;
+    top: .5rem;
+    padding: .2rem;
+    border-radius: 5px;
+    min-width: 4rem;
+    height: 1.8rem;
+    background-color: var(--main-color);
+}
+
+.login-button:hover{
+    background-color: rgb(79, 117, 119);
+}
+
+.login-name{
+    position: fixed;
+    right: 7rem;
+    top: .5rem;
+    padding: .2rem;
+    height: 1.8rem;
+}
+
+.modal-login-container{
+    position: fixed;
+    right: 2rem;
+    top: 3rem;
+    border: 1.5px solid black;
+    padding: 1rem;
+    background-color:rgb(109, 109, 109, 0.90);
+    color: white;
+    min-width: 20rem;
+    min-height: 8rem;
+}
+
+.login-on{
+    display: block;
+}
+
+.login-off{
+    display: none;
+}
+
+#login_form{
+    padding-top: 1rem;
+}
+.form-labelOverInput{
+    display: block;
+}
+
+.form-AceptarBtn{
+    text-align: right;
+    margin-top: 2.5rem;
+}
+
+#login_submit{
+    padding: .3rem;
+    border-radius: 5px;
+}
+
+
 /* ============================= Ahorcado ============================= */
 
 

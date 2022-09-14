@@ -11,7 +11,9 @@
 </head>
 <body>
     <header>
-        <h1>Juegos</h1> 
+        <h1>Juegos</h1>
+        <h3 class="login-name"></h3>
+        <button class="login-button">Login</button>
     </header>
 
     <div class="cuerpo">
@@ -45,16 +47,31 @@
                 <div class="espacioPalabra">
                     <h2 id="resultado" class="resultado"></h2>
                 </div>
-            </section>
-            
+            </section>          
         </main>
+
+        <aside>
+            <section class="modal-login-container login-off" id="login">
+                <h2>Login</h2>
+                <form id="login_form">
+                    <div class="form-labelOverInput">
+                        <label for="usuario">Nombre de Usuario</label>
+                        <input type="text" name="usuario" id="login_usuario"/>
+                    </div>
+                    <div class="form-AceptarBtn">
+                        <input type="submit" value="Aceptar" id="login_submit">
+                    </div>
+                    
+                </form>
+            </section>
+        </aside>
     </div>
     
     <footer>
         <p>CoderHouse - Berdasco - JavaScript - Ejercicios</p>
     </footer>
 
-    
+    <script src="./scripts/login.js"></script>
     <script src="./scripts/frogger/froggerFunc.js"></script>
     <script>
         ResetFrogger();

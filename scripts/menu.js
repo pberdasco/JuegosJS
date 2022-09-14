@@ -1,5 +1,6 @@
 rueda = 0;
 
+
 function CargarPagina(pagina){
     location. href = pagina;
 }

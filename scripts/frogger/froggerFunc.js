@@ -198,29 +198,6 @@ function MoverRana(e){
     EvaluarVictoria(rana);
 }
 
-/*
-function MoverVehiculos(){
-    ticks++;
-    for(let i = 0; i < listaVehiculos.length; i++){
-        if(ticks % listaVehiculos[i].Velocidad === 0){
-            DespintarCeldas(listaVehiculos[i].Clase, listaVehiculos[i].Fila, listaVehiculos[i].Columna, listaVehiculos[i].Largo);
-            if (listaVehiculos[i].Velocidad > 0){
-                listaVehiculos[i].Columna--;
-                if (listaVehiculos[i].Columna < 0){
-                    listaVehiculos[i].Columna = COLUMNAS - listaVehiculos[i].Largo;
-                }
-            }else{
-                listaVehiculos[i].Columna++;
-                if (listaVehiculos[i].Columna > COLUMNAS - listaVehiculos[i].Largo){
-                    listaVehiculos[i].Columna = 0;
-                }
-            } 
-            listaVehiculos[i].Dibujar();          
-            PintarCeldas(listaVehiculos[i].Clase, listaVehiculos[i].Fila, listaVehiculos[i].Columna, listaVehiculos[i].Largo);
-        }
-    }    
-}
-*/
 
 function MoverVehiculos(){
     ticks++;

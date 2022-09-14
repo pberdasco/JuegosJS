@@ -13,6 +13,8 @@
 <body>
     <header>
         <h1>Juegos</h1>
+        <h3 class="login-name"></h3>
+        <button class="login-button">Login</button>
     </header>
 
     <div class="cuerpo">
@@ -36,14 +38,29 @@
                 <p class="textoIndex">La BATALLA NAVAL agrega ademas de las funciones y vectores el uso de Clases y Objetos</p>
                 <p class="textoIndex">FROGGER, incluye un manejo amplio de DOM, eventListeners y setInterval, tambien maneja clases y objetos</p>
             </section>
-
-
         </main>
+
+        <aside>
+            <section class="modal-login-container login-off" id="login">
+                <h2>Login</h2>
+                <form id="login_form">
+                    <div class="form-labelOverInput">
+                        <label for="usuario">Nombre de Usuario</label>
+                        <input type="text" name="usuario" id="login_usuario"/>
+                    </div>
+                    <div class="form-AceptarBtn">
+                        <input type="submit" value="Aceptar" id="login_submit">
+                    </div>
+                    
+                </form>
+            </section>
+        </aside>
     </div>
     
     <footer>
         <p>CoderHouse - Berdasco - JavaScript - Ejercicios</p>
     </footer>
 
+    <script src="./scripts/login.js"></script>
 </body>
 </html>
