@@ -208,9 +208,8 @@ function MoverVehiculos(){
 }
                                       
 function EvaluarColision(vehiculo){
-    if (vehiculo.Fila === rana.Fila && (vehiculo.Columna <= rana.Columna && vehiculo.Columna + vehiculo.Largo >= rana.Columna)){
-        FinNivel("Perdiste !!!");
-        StopFrogger();
+    if (vehiculo.Fila === rana.Fila && (vehiculo.Columna <= rana.Columna && vehiculo.Columna + vehiculo.Largo >= rana.Columna)){      
+        FinNivel(AnalizarRecord());
         nivel = 1;
         speed = 50;
         clearInterval(segundosID);
@@ -228,6 +227,39 @@ function FinNivel(mensaje){
     StopFrogger();
     ganastePerdiste.textContent = mensaje;
     cambiaNivel = true;
+}
+
+function AnalizarRecord(){
+    let situacion = "Perdiste !!!";
+    const usuario = localStorage.getItem("Usuario");
+
+    if (usuario){
+        const recordGeneral = JSON.parse(localStorage.getItem("Record-General"));
+        let recordPropio = JSON.parse(localStorage.getItem(`Record-${usuario}`));
+        
+
+        const record = {
+            Usuario: usuario,
+            Fecha: Date.now(),
+            Nivel: nivel,
+            Tiempo: segundos   
+        };
+        const recordString = JSON.stringify(record);
+
+        if(!recordGeneral || recordGeneral.Nivel > nivel || (recordGeneral.Nivel === nivel && recordGeneral.Tiempo <= segundos)){
+            situacion = "Espectacular. Tenés un nuevo record General!!!";
+            localStorage.setItem(`Record-General`,recordString);
+            localStorage.setItem(`Record-${usuario}`,recordString);
+            console.log("Record General:",record);
+        }else{
+            if(!recordPropio || recordPropio.Nivel > nivel || (recordPropio.Nivel === nivel && recordPropio.Tiempo <= segundos)){
+                situacion = "Muy bien. Tenés un nuevo record Personal!!!";            
+                localStorage.setItem(`Record-${usuario}`,recordString);
+                console.log("Record Propio:",record);
+            }
+        }
+    }      
+    return situacion;
 }
 
 function CrearVehiculos(){
