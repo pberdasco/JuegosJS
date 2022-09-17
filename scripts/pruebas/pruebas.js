@@ -1,3 +1,39 @@
+/* esta parte necesita la clase records */
+
+const myFirstRecord = new Record("Pablo", 2, 44);
+let recordPersonal = Record.Get("FG","Pablo");
+let recordGeneral = Record.Get("FG", "General");
+
+
+if (myFirstRecord.IsNewRecord(recordPersonal)){
+    console.log("Pablo. nuevo record personal. Guardandolo")
+    myFirstRecord.Save("Personal");
+}  
+if (myFirstRecord.IsNewRecord(recordGeneral)){
+    console.log("Pablo. nuevo record General. Guardandolo")
+    myFirstRecord.Save("General");
+}  
+
+recordPersonal = Record.Get("FG","Pablo");
+recordGeneral = Record.Get("FG", "General");
+
+
+// ----- ahora pedro
+const PedroFirstRecord = new Record("Pedro", 2, 60);
+recordPersonal = Record.Get("FG","Pedro");
+if (PedroFirstRecord.IsNewRecord(recordPersonal)){
+    console.log("Pedro. nuevo record personal. Guardandolo")
+    PedroFirstRecord.Save("Personal");
+}  
+recordGeneral = Record.Get("FG", "General");
+if (PedroFirstRecord.IsNewRecord(recordGeneral)){
+    console.log("Pedro. nuevo record General. Guardandolo")
+    PedroFirstRecord.Save("General");
+}  
+
+console.log(Record.GetList("FG"));
+
+
 //=========================  Algo de DOM
 let divs = document.getElementsByTagName("div");  // devuelve una lista de elementos
 for ( const oneDiv of divs){
@@ -31,6 +67,46 @@ h1Tag[0].innerText= `Nuevo
                      Titulo`;
 
 
+a = 19;
+b = 1;
+c = 4;
+
+console.log("19 (10011) and 1 (00001):",a & b);
+console.log("19 (10011) and 4 (00100):",a & c);
+console.log("19 (10011) or 4 (00100):",a | c);
+console.log("19 (10011) >> 1:",a >> 1);
+
+console.log("=======================");
+console.log("Spreed, y copia de vectores")
+
+let vector1 = [3,5,9];
+let vector2 = vector1;   
+
+
+let vector3=[]
+for (let i = 0; i<vector1.length;i++){
+    vector3[i]=vector1[i];
+}
+
+vector4 = vector1.slice();
+
+let vector5 = [...vector1];
+
+vector2[1] = 22;
+
+console.log(vector1);
+console.log(vector2);
+console.log(vector3);
+console.log(vector4);
+console.log(vector5);
+
+console.log("=======================");
+
+
+const array1 = [1,2,3,4,5,6];
+const array2 = [];
+array1.forEach((x) => array2.push(x * 2));
+
 // Prueba de onwheel="MueveRueda(event)"
 function MueveRueda(event){
     //console.log(event);
@@ -39,3 +115,19 @@ function MueveRueda(event){
     
     console.log(rueda, event.wheelDelta);
 }
+
+
+
+
+
+/* ====== Lectura y Modificion Variables CSS ====== */
+const root = document.querySelector(':root');
+
+function getRootVariable(variable){
+    return getComputedStyle(root).getPropertyValue(variable);
+}
+
+function setRootVariable(variable, value){
+    root.style.setProperty(variable, value);
+}
+

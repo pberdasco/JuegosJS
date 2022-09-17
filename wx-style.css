@@ -1,0 +1,59 @@
+:root{
+    --w-popup-ok-bc: white;
+    --w-popup-ok-fc: black;
+    --w-popup-err-bc: red;
+    --w-popup-err-fc: black;
+    --w-popup-input-bc: rgb(109, 109, 109, 0.90);
+    --w-popup-input-fc: white;
+    --w-popup-top: 2rem;
+    --w-popup-left: 2rem;
+    --w-popup-right: 2rem;
+    --w-popup-width: 20rem;
+    --w-popup-height: 8rem; 
+}
+
+.w-popup-on{
+    display: block;
+}
+
+.w-popup-off{
+    display: none;
+}
+
+.w-modal-container{
+    position: fixed; 
+    top: var(--w-popup-top);
+    min-width: var(--w-popup-width);
+    min-height: var(--w-popup-height);
+    border: 1.5px solid black;
+    padding: 1rem;    
+}
+
+.w-modal-container-t-ok{
+    background-color: var(--w-popup-ok-bc, white);
+    color: var(--w-popup-ok-fc, black);
+}
+
+.w-modal-container-t-err{
+    background-color: var(--w-popup-err-bc, red);
+    color: var(--w-popup-err-fc, black);
+}
+
+.w-modal-container-t-input{
+    background-color: var(--w-popup-input-bc, darkgrey);
+    color: var(--w-popup-input-fc, white);
+}
+
+.wx-closeX{
+    border-radius: 100%;
+    background-color: darkblue;
+    color: white;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.wx-closeX:hover{
+    background-color: blue; 
+}
+

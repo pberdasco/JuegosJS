@@ -229,38 +229,6 @@ function FinNivel(mensaje){
     cambiaNivel = true;
 }
 
-function AnalizarRecord(){
-    let situacion = "Perdiste !!!";
-    const usuario = localStorage.getItem("Usuario");
-
-    if (usuario){
-        const recordGeneral = JSON.parse(localStorage.getItem("Record-General"));
-        let recordPropio = JSON.parse(localStorage.getItem(`Record-${usuario}`));
-        
-
-        const record = {
-            Usuario: usuario,
-            Fecha: Date.now(),
-            Nivel: nivel,
-            Tiempo: segundos   
-        };
-        const recordString = JSON.stringify(record);
-
-        if(!recordGeneral || recordGeneral.Nivel > nivel || (recordGeneral.Nivel === nivel && recordGeneral.Tiempo <= segundos)){
-            situacion = "Espectacular. Tenés un nuevo record General!!!";
-            localStorage.setItem(`Record-General`,recordString);
-            localStorage.setItem(`Record-${usuario}`,recordString);
-            console.log("Record General:",record);
-        }else{
-            if(!recordPropio || recordPropio.Nivel > nivel || (recordPropio.Nivel === nivel && recordPropio.Tiempo <= segundos)){
-                situacion = "Muy bien. Tenés un nuevo record Personal!!!";            
-                localStorage.setItem(`Record-${usuario}`,recordString);
-                console.log("Record Propio:",record);
-            }
-        }
-    }      
-    return situacion;
-}
 
 function CrearVehiculos(){
     listaVehiculos = [new Vehiculo(2,80,4,3,"colectivo"), 
@@ -293,3 +261,60 @@ function CrearVehiculos(){
     }
     elementoVehiculos.textContent = `Vehiculos: ${listaVehiculos.length}`;
 }
+
+
+function AnalizarRecord(){
+    let situacion = "Perdiste !!!";
+    const usuario = localStorage.getItem("Usuario");
+
+    if (usuario){
+        const recordGeneral = Record.Get("FG");
+        let recordPersonal = Record.Get("FG",usuario);
+        const record = new Record(usuario,nivel,segundos);         
+        if (record.IsNewRecord(recordGeneral)){
+            situacion = "Espectacular. Tenés un nuevo record General!!!";
+            record.Save("General");
+            record.Save("Personal");
+        }else if(record.IsNewRecord(recordPersonal)){
+                situacion = "Muy bien. Tenés un nuevo record Personal!!!";            
+                record.Save("Personal");            
+        }
+    }      
+    return situacion;
+}
+
+/*
+function AnalizarRecord(){
+    let situacion = "Perdiste !!!";
+    const usuario = localStorage.getItem("Usuario");
+
+    if (usuario){
+        const recordGeneral = JSON.parse(localStorage.getItem("Record-General"));
+        let recordPropio = JSON.parse(localStorage.getItem(`Record-${usuario}`));
+        
+
+        const record = {
+            Usuario: usuario,
+            Fecha: Date.now(),
+            Nivel: nivel,
+            Tiempo: segundos   
+        };
+        const recordString = JSON.stringify(record);
+
+        if(!recordGeneral || recordGeneral.Nivel > nivel || (recordGeneral.Nivel === nivel && recordGeneral.Tiempo <= segundos)){
+            situacion = "Espectacular. Tenés un nuevo record General!!!";
+            localStorage.setItem(`Record-General`,recordString);
+            localStorage.setItem(`Record-${usuario}`,recordString);
+            console.log("Record General:",record);
+        }else{
+            if(!recordPropio || recordPropio.Nivel > nivel || (recordPropio.Nivel === nivel && recordPropio.Tiempo <= segundos)){
+                situacion = "Muy bien. Tenés un nuevo record Personal!!!";            
+                localStorage.setItem(`Record-${usuario}`,recordString);
+                console.log("Record Propio:",record);
+            }
+        }
+    }      
+    return situacion;
+}
+*/
+
