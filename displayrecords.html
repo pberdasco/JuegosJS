@@ -8,7 +8,10 @@
 
     <link rel="stylesheet" href="./style.css">
     <script src="./scripts/menu.js"></script>            <!-- Manejo de botones del menu : General -->  
-    <script src="./scripts/records.js"></script>  
+    <script src="./scripts/records.js"></script>         <!-- Clase que maneja el calculo y grabacion de records logrados en los juegos x usuario -->
+    <script src="./scripts/classtable.js"></script>       <!-- Clase para armar tablas a partir arrays con filas -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  <!-- Libreria chart.js -->
 </head>
 <body>
     <header>
@@ -21,33 +24,23 @@
         <nav>
             <ul>
                 <li><button class="botonNav" type="button" onclick="CargarPagina('./ahorcado.html')" id="btnAhorcado">Ahorcado</button></li>
-                <li><button class="botonNav" type="button" onclick="CargarPagina('./batallanaval.html')" id="btnBatalla">Batalla Navval</button></li>
-                <li><button class="botonNav" type="button" onclick="CargarPagina('./index.html')" id="btnPrincipal">Pagina Principal</button></li>
-                <li><button class="botonNav" type="button" onclick="CargarPagina('./displayrecords.html')" id="btnRecords">Records</button></li>
+                <li><button class="botonNav" type="button" onclick="CargarPagina('./frogger.html')" id="btnBatalla">Frogger</button></li>
+                <li><button class="botonNav" type="button" onclick="CargarPagina('./index.html')" id="btnSimon">Pagina Principal</button></li>
             </ul>
         </nav>
         <main class="areaTrabajo">
             <section class="recuadros tituloJuego">
-                <h2 id="texto">Frogger</h2>
+                <h2 id="texto">Records</h2>
             </section>
             <section class="recuadros espacioJuego">
-                <div class="areaJuegoFrogger">
-                    <div class="espacio"></div>
-                    <div class="juegoFrogger">
-                        <div class="flexible">
-                            <button class="botonStart" type="button" onclick="StartStopFrogger()" id="btnStart">Parar/Iniciar</button>
-                            <h3 id="nivel"></h3>
-                        </div>
-                        <table id="rutaFrogger">
-                        </table>
-                        <div class="flexible">
-                            <h3 id="vehiculos"></h3>
-                            <h3 id="tiempo"></h3>
-                        </div>
-                    </div>
+                <div class="areaDisplayRecords">
+                    <!-- Aca js debe insertar una tabla -->
                 </div>
-                <div class="espacioPalabra">
-                    <h2 id="resultado" class="resultado"></h2>
+                <div class="areaBotonesDisplayRecords">
+                    <button class="records-button">Borrar Records</button>
+                </div>
+                <div>
+                    <canvas id="myChart"></canvas>
                 </div>
             </section>          
         </main>
@@ -74,9 +67,9 @@
     </footer>
 
     <script src="./scripts/login.js"></script>
-    <script src="./scripts/frogger/froggerFunc.js"></script>
+    <script src="./scripts/diplayrecords.js"></script>
     <script>
-        ResetFrogger();
+        TablaYChart("FG");
     </script>
 
       

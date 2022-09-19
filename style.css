@@ -313,7 +313,52 @@ main{
     background-color: goldenrod;
 }
 
+/* ========================= Tabla clase Grid ======================= */
+.areaDisplayRecords, .areaBotonesDisplayRecords {
+    text-align: center;
+}
 
+.gridTable{
+    margin: auto;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    border: 2px solid black
+}
+
+.gridElements{
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: var(--head-foot-color);
+    border: 1px solid darkgray;
+    border-collapse: collapse;
+}
+.gridTitleElements{
+    color: rgb(72, 118, 121);
+}
+
+.gridDataElements{
+    color: black;
+}
+
+.records-button{
+    margin: .5rem;
+    padding: .5rem;
+    border-radius: 5px;
+    background-color: var(--head-foot-color);
+    min-width: 6rem;
+    height: 2rem;
+    text-align: center;
+}
+
+.records-button:hover{
+    background-color: var(--nav-color);
+}
+
+#myChart{
+    margin: auto;
+    max-width: 70%;
+    max-height: 15rem;
+}
 
 /* =========================== Prueba Grilla ========================= */
 
