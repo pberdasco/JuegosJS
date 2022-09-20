@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba JS</title>
+
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/simon.css">
+    
+    <script src="./scripts/simon/simon.js"></script>
+    <script src="./scripts/menu.js"></script>
+    
+</head>
+<body>
+    <script>
+        SimonSetup(100);
+    </script>
+
+    <header>
+        <h1>Pantalla para pruebas JavaScript</h1>
+    </header>
+
+    <div class="cuerpo">
+        <nav>
+            <ul>
+                <li><button class="botonNav" type="button" onclick="CargarPagina('./calculadora.html')" id="btnCalculadora">Calculadora</button></li>
+                <li><button class="botonNav" type="button" onclick="CargarPagina('./index.html')" id="btnCalculadora">Principal</button></li>
+            </ul>
+        </nav>
+        <main class="areaTrabajo">
+            <section class="recuadros dos-columnas">
+                <h3 id="texto"></h3>
+                <button class="botonStart" type="button" onclick="SimonList()" id="btnStart">Comenzar</button>
+            </section>
+            <section class="recuadros">
+                <div class="half-circle">
+                    <button class="circular top-left" id="simon1" type="button" onclick="SimonPress(1)"></button>
+                    <button class="circular top-right" id="simon2" type="button" onclick="SimonPress(2)"></button>
+                </div>
+                <div class="half-circle">
+                    <button class="circular bottom-left" id="simon3" type="button" onclick="SimonPress(3)"></button>
+                    <button class="circular bottom-right" id="simon4" type="button" onclick="SimonPress(4)"></button>
+                </div>
+            </section>
+            
+        </main>
+    </div>
+    
+    <footer>
+        <p>CoderHouse - Berdasco - JavaScript - Ejercicios</p>
+    </footer>
+
+</body>
+</html>
