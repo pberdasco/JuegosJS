@@ -1,0 +1,12 @@
+/* =========================== Prueba Grilla ========================= */
+
+.box{
+    border:1px solid white;
+    text-align: center;
+}
+
+.output{
+    display: grid;
+    width:80vw;
+    margin: auto;
+}

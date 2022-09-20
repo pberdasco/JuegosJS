@@ -1,5 +1,5 @@
 function dibujarTablero(lado, maxX, maxY){
-    const tableros = ["#tableroJujador", "#tableroMaquina"]
+    const tableros = ["#bn_tableroJujador", "#bn_tableroMaquina"]
     const tablero = document.querySelector(tableros[lado]);
     tablero.textContent = "";
     const celdas = [];
@@ -18,13 +18,13 @@ function dibujarTablero(lado, maxX, maxY){
 
 function CreateTR(i, tablero){
     const element = document.createElement("tr");
-    element.classList.add("celda")
+    element.classList.add("bn_celda")
     return tablero.appendChild(element);
 }
 
 function CreateTD(i, j, linea){
     const element = document.createElement("td");
-    element.classList.add("celda")
+    element.classList.add("bn_celda")
     return linea.appendChild(element);
 }
 
