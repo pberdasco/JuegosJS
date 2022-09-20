@@ -72,3 +72,41 @@ Funciones
     ValidarDisparo(arrayBarcos, posicionDisparo) =>
         Recibe: un array de Barco y una Posicion de disparo
         Devuelve: el id de un barco (de los incluidos en el array) si el disparo impacta en él o -1 si el disparo es Agua
+
+================================================================================================================================
+
+celdas[x][y] global
+
+dibujarTablero  -> createTR
+                -> createTD
+				-> PintarCoordenadas (fila y columna 0)
+				Retorna:
+				-> celdas[x][y]
+
+dibujarBarco(barco, celdas) -> en base a la posicion del barco
+                               lo pinta en la grilla rojo o verde (tocado o no)
+							   con el id del barco
+
+Clases (batallaNaval.js)
+Class Ubicacion		-> Class Posicion
+					Métodos:
+						-> Largo
+						->EsValida
+
+
+Class Barco  ->  Class TipoBarco
+             ->  Class Ubicacion  -> Class Posicion
+			 Métodos:
+				->MarcarTocado
+				->Hundido
+			 Propiedades:
+				->Id / TipoId / Ubicacion / Jugador / Estado[]
+			 
+			 
+TiposBarco = TipoBarco[]
+
+
+Funciones sueltas (batallaNaval.js)
+PosLN(letra, numero) (dada una combinacion "A","5" crea una posicion 
+
+ValidarDisparo(arrayBarcos, posicionDisparo)
