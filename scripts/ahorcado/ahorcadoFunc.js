@@ -14,7 +14,8 @@ function ResetAhorcado(){
     letrasAcertadas = InicializarLetrasAcertadas(); 
     
     DisplayPalabra(PalabraVisible()); 
-    SetFocusOnLetra(); 
+   
+    SetFocusOnLetra();  
 }
 
 function LetraRecibida(letra){

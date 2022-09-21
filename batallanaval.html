@@ -40,6 +40,38 @@
                         </table>
                     </div>
                 </div>
+
+                    <div class="bn_tableros">  <!-- aca se pone y saca bn_off-->    
+                        <form id="ingresoBarco">
+                            <div class="grupoIngreso">
+                                <label class="labelAbove">Ingrese un barco:</label>
+                                <select name="barcoSelect" id="barcoSelect">
+                                    <!-- Aca insertar opciones de tipos de barcos -->
+                                    <option value="1">Submarino</option>
+                                    <option value="2" selected>Fragata</option>
+                                </select>
+                            </div>
+                            <div class="grupoIngreso">
+                                <label class="labelAbove">Ubicado en: (F / C)</label>
+                                <input type="text" id="letraInput1" value="" maxlength="1" size="1">
+                                <input type="text" id="letraInput2" value="" maxlength="1" size="1">
+                            </div>
+                            <div class="grupoIngreso">
+                                <div>
+                                    <label>Dirección</label>
+                                    <div class="fl">
+                                        <input type="radio" id="dirH" name="direccion" checked value="H">
+                                        <label for="dirH">Horizontal</label><br>
+                                    </div>
+                                    <div class="fl">
+                                        <input type="radio" id="dirV" name="direccion" value="V">
+                                        <label for="dirV">Vertical</label><br>
+                                    </div>
+                                </div>
+                            </div>  
+                        </form>    
+                        <button class="botonNuevoBarco" type="button" onclick="CargarBarco()" id="btnNuevoBarco">Cargar</button>
+                    </div>
                 
             </section>
             
@@ -50,9 +82,15 @@
         <p>CoderHouse - Berdasco - JavaScript - Ejercicios</p>
     </footer>
 
-    <script src="./scripts/batallanaval/BatallaNavalUI.js"></script>
-    <script src="./scripts/batallanaval/BatallaNaval.js"></script>
+    <script src="./scripts/batallanaval/variablesGlobales.js"></script>
+    <script src="./scripts/batallanaval/batallaNavalUI.js"></script>
+    <script src="./scripts/batallanaval/classUbicacion.js"></script>
+    <script src="./scripts/batallanaval/classTipoBarco.js"></script>
+    <script src="./scripts/batallanaval/classBarco.js"></script>
+    <script src="./scripts/batallanaval/batallaNavalFunc.js"></script>
     <script src="./scripts/batallanaval/pruebasBatallaNaval.js"></script>
+    <script src="./scripts/batallanaval/batallaNavalExecute.js"></script>
+
 
 </body>
 </html>

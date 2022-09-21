@@ -72,7 +72,6 @@ function TextoFin(estado){
 }
 
 function SetFocusOnLetra(){
-    console.log("focus");
     document.getElementById("letraInput").focus();
 }
 
