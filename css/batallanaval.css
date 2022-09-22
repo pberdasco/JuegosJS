@@ -1,14 +1,10 @@
 /* =========================== Batalla Naval ========================= */
 
 .bn_tableros{
-    padding-top: 1.5rem;
     display:flex;
     justify-content:space-around;
+    padding-top: 1.5rem;
     align-items: center;
-}
-
-.bn_off{
-    display: none;
 }
 
 .bn_celda{
@@ -18,26 +14,57 @@
     height: 1rem;
 }
 
+.bn_off{
+    display: none;
+}
+
+.bn_ingresos{
+    padding-top: 1.5rem;
+}
+ 
 #ingresoBarco{
-    width: 950%;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
     gap:1rem;
     justify-content: space-between;
     border: 1px solid black;
+    background-color: var(--nav-color);
 }
 
-.grupoIngreso{
+.bn_grupoIngreso{
     text-align: center;
     flex: 1;
     padding: 5px;
-    /* background-color: aqua; */
 }
-.fl{
+.bn_fl{
     text-align: start;
-    padding: 0 30%;
+    padding: 0 20%;
 }
 
 
-.labelAbove{
+.bn_labelAbove{
     display: block;
+    color: white;
+    padding-bottom: .3rem; 
+    font-weight: 500;
+}
+
+.bn_buttonAction{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto; 
+    text-align: end;
+}
+
+.botonNuevoBarco{
+    min-width: 7rem;
+    margin-top: .3rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: .5rem; 
+}
+.botonNuevoBarco:hover{
+    background-color: var(--nav-color);
 }

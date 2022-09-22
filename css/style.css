@@ -11,11 +11,14 @@
     padding: 0;
   }
 
+  html{
+    font-size: 2.2vh;
+  }
 
 /* ============================   Header General  ============================== */  
 header{
     background-color: var(--head-foot-color);
-    height: 3rem;
+    height: 6vh;
 }
 
 header h1{
@@ -28,7 +31,6 @@ header h1{
 
 .cuerpo{ 
     display: flex; 
-    min-height: 40rem;
 }
 
 nav{
@@ -65,7 +67,8 @@ main{
 
 .recuadros{
     border: solid 1px black;
-    min-height: 2rem;
+    /* min-height: 2rem; */
+    min-height: 4vh;
     margin: 1rem;
     padding: .5rem;
 }
@@ -76,7 +79,7 @@ main{
 }
 
 .espacioJuego{
-    min-height: 30rem;
+    min-height: 70vh;
 }
 
 .espacioPalabra{
@@ -101,7 +104,7 @@ main{
     border-radius: 5px;
     background-color: var(--head-foot-color);
     min-width: 6rem;
-    height: 2rem;
+    height: 2.4rem;
     text-align: center;
 }
 
@@ -174,7 +177,7 @@ main{
 /* =========================== Footer General ========================= */
 footer{
     background-color: var(--head-foot-color);
-    min-height: 1.5rem;
+    min-height: 4vh;
     text-align: center;
 }
 
