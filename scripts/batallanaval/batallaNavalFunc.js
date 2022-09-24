@@ -1,22 +1,3 @@
-class Tablero{
-    Logico = [];
-    Grafico = [];
-    Id = 0;
-    // dibuja debe ser (-1 = no dibuja, 0 = tablero propio, 1 = tablero disparos)
-    constructor(id, dibuja){
-        this.Id = id;
-        for(let i= 0; i < MAX_Y; i++){
-            this.Logico.push([]); 
-            for(let j= 0; j < MAX_X; j++){
-                this.Logico[i].push(CELDA_VACIA);          
-            }
-        }
-        if (dibuja >= 0) this.Grafico = dibujarTablero(dibuja,MAX_X,MAX_Y);
-    }
-}
-
-
-
 
 
 function ValidarDisparo(arrayBarcos, posicionDisparo){

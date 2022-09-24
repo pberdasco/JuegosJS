@@ -19,7 +19,7 @@
         <nav>
             <ul>
                 <li><button class="botonNav" type="button" onclick="CargarPagina('./ahorcado.html')" id="btnAhorcado">Ahorcado</button></li>
-                <li><button class="botonNav" type="button" onclick="CargarPagina('./batallanaval.html')" id="btnBatalla">Batalla Navval</button></li>
+                <li><button class="botonNav" type="button" onclick="CargarPagina('./frogger.html')" id="btnFrog">Frogger</button></li>
                 <li><button class="botonNav" type="button" onclick="CargarPagina('./index.html')" id="btnSimon">Pagina Principal</button></li>
             </ul>
         </nav>
@@ -30,54 +30,21 @@
             <section class="recuadros espacioJuego">
                 <div class="bn_tableros">
                     <div class="bn_tablero">
-                        <table id="bn_tableroJujador">
+                        <table id="bn_tableroJujadorPropio">
 
                         </table>
                     </div>
                     <div class="bn_tablero">
-                        <table id="bn_tableroMaquina">
+                        <table id="bn_tableroJugadorDisparos">
                             
                         </table>
                     </div>
                 </div>
 
-                <div class="bn_ingresos ">  <!-- aca se pone y saca bn_off-->    
-                    <form id="ingresoBarco">
-                        <div class="bn_grupoIngreso">
-                            <label class="bn_labelAbove">Barco:</label>
-                            <label class="">#4</label>
-                        </div>
-                        <div class="bn_grupoIngreso">
-                            <label class="bn_labelAbove">Ingrese un barco:</label>
-                            <select name="barcoSelect" id="barcoSelect">
-                                <!-- Aca insertar opciones de tipos de barcos -->
-                                <option value="1">Submarino</option>
-                                <option value="2" selected>Fragata</option>
-                            </select>
-                        </div>
-                        <div class="bn_grupoIngreso">
-                            <label class="bn_labelAbove">Ubicado en: (F / C)</label>
-                            <input type="text" id="letraInput1" value="" maxlength="1" size="1">
-                            <input type="text" id="letraInput2" value="" maxlength="1" size="1">
-                        </div>
-                        <div class="bn_grupoIngreso">
-                            <div>
-                                <label class="bn_labelAbove">Dirección</label>
-                                <div class="bn_fl">
-                                    <input type="radio" id="dirH" name="direccion" checked value="H">
-                                    <label for="dirH">Horizontal</label><br>
-                                </div>
-                                <div class="bn_fl">
-                                    <input type="radio" id="dirV" name="direccion" value="V">
-                                    <label for="dirV">Vertical</label><br>
-                                </div>
-                            </div>
-                        </div>  
-                    </form>    
-                    <div class="bn_buttonAction">
-                        <button class="botonNuevoBarco" type="button" onclick="CargarBarco()" id="btnNuevoBarco">Borrar Ultimo</button>
-                        <button class="botonNuevoBarco" type="button" onclick="CargarBarco()" id="btnNuevoBarco">Cargar</button>
-                    </div>
+                <div id="bn_ingresoBarco">  <!-- aca se pone y saca bn_off-->    
+                    <h2 class="bn_mensajeIngreso"></h2>
+                    <button class="bn_jugar">Proximo</button>
+                    
                 </div>
                 
                     
@@ -97,6 +64,7 @@
     <script src="./scripts/batallanaval/classUbicacion.js"></script>
     <script src="./scripts/batallanaval/classTipoBarco.js"></script>
     <script src="./scripts/batallanaval/classBarco.js"></script>
+    <script src="./scripts/batallanaval/classTablero.js"></script>
     <script src="./scripts/batallanaval/batallaNavalFunc.js"></script>
     <script src="./scripts/batallanaval/pruebasBatallaNaval.js"></script>
     <script src="./scripts/batallanaval/batallaNavalExecute.js"></script>

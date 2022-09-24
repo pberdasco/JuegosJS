@@ -1,3 +1,4 @@
+/*
 function elijeFuncion (opcion, f0){
     switch (opcion){
         case "+":
@@ -63,7 +64,7 @@ arrayTest.forEach(f3);
 console.log(document.body);
 console.dir(document.body);
 
-
+*/
 
 
 

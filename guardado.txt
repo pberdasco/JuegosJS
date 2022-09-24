@@ -1,0 +1,98 @@
+// ========  Esto iba si queriamos pedir sin clicks los barcos   (HTML) 
+    <div class="bn_ingresos ">  <!-- aca se pone y saca bn_off-->    
+        <div class="mensajeIngreso"></div>
+        <button class="jugar">Jugar</button>
+        <form id="ingresoBarco">
+            <div class="bn_grupoIngreso">
+                <label class="bn_labelAbove">Barco:</label>
+                <label class="">#4</label>
+            </div>
+            <div class="bn_grupoIngreso">
+                <label class="bn_labelAbove">Ingrese un barco:</label>
+                <select name="barcoSelect" id="barcoSelect">
+                    <!-- Aca insertar opciones de tipos de barcos -->
+                    <option value="1">Submarino</option>
+                    <option value="2" selected>Fragata</option>
+                </select>
+            </div>
+            <div class="bn_grupoIngreso">
+                <label class="bn_labelAbove">Ubicado en: (F / C)</label>
+                <input type="text" id="letraInput1" value="" maxlength="1" size="1">
+                <input type="text" id="letraInput2" value="" maxlength="1" size="1">
+            </div>
+            <div class="bn_grupoIngreso">
+                <div>
+                    <label class="bn_labelAbove">Dirección</label>
+                    <div class="bn_fl">
+                        <input type="radio" id="dirH" name="direccion" checked value="H">
+                        <label for="dirH">Horizontal</label><br>
+                    </div>
+                    <div class="bn_fl">
+                        <input type="radio" id="dirV" name="direccion" value="V">
+                        <label for="dirV">Vertical</label><br>
+                    </div>
+                </div>
+            </div>  
+        </form>    
+        <div class="bn_buttonAction">
+            <button class="botonNuevoBarco" type="button" onclick="CargarBarco()" id="btnNuevoBarco">Borrar Ultimo</button>
+            <button class="botonNuevoBarco" type="button" onclick="CargarBarco()" id="btnNuevoBarco">Cargar</button>
+        </div>
+    </div>
+
+    // ========  Esto iba si queriamos pedir sin clicks los barcos   (CSS) 
+    
+.bn_off{
+    display: none;
+}
+
+.bn_ingresos{
+    padding-top: 1.5rem;
+}
+ 
+#ingresoBarco{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    gap:1rem;
+    justify-content: space-between;
+    border: 1px solid black;
+    background-color: var(--nav-color);
+}
+
+.bn_grupoIngreso{
+    text-align: center;
+    flex: 1;
+    padding: 5px;
+}
+.bn_fl{
+    text-align: start;
+    padding: 0 20%;
+}
+
+
+.bn_labelAbove{
+    display: block;
+    color: white;
+    padding-bottom: .3rem; 
+    font-weight: 500;
+}
+
+.bn_buttonAction{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto; 
+    text-align: end;
+}
+
+.botonNuevoBarco{
+    min-width: 7rem;
+    margin-top: .3rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: .5rem; 
+}
+.botonNuevoBarco:hover{
+    background-color: var(--nav-color);
+}

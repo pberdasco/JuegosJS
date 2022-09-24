@@ -1,4 +1,39 @@
-/* esta parte necesita la clase records */
+
+// === Creando y usando procesos asyncronos
+/*
+setTimeout(callback, 6000, "8 segundos", "8S");
+setTimeout(callback, 4000, "5 segundos", "5S");
+setTimeout(callback, 2000, "2 segundos", "2S");
+
+const eventoFuturo = (res) => {
+    return new Promise ( (resolve, reject) => {
+        console.log(`procesado ${res}...`);
+        setTimeout( () => {
+            res ? resolve(`... fin proceso ${res}`) :  reject(`promesa rechazada`)  
+        } ,8000, res);
+    } )
+}
+
+console.log(eventoFuturo(true)
+                .then((response) => console.log("sali del proceso true"+response))
+                .catch((error) => console.log(error)));
+console.log(eventoFuturo(false)
+                .then((response) => console.log("sali del proceso true"+response))
+                .catch((error) => console.log(error)));
+
+function callback(texto, tipo){
+    console.log("pasaron: ", texto, tipo);
+}
+*/
+
+const titulo = document.querySelector("#texto");
+titulo.addEventListener("dblclick", (e) => {alert(e.type)})
+ 
+
+
+/*
+
+// esta parte necesita la clase records 
 
 const myFirstRecord = new Record("Pablo", 2, 44);
 let recordPersonal = Record.Get("FG","Pablo");
@@ -120,7 +155,7 @@ function MueveRueda(event){
 
 
 
-/* ====== Lectura y Modificion Variables CSS ====== */
+//====== Lectura y Modificion Variables CSS ====== 
 const root = document.querySelector(':root');
 
 function getRootVariable(variable){
@@ -131,3 +166,4 @@ function setRootVariable(variable, value){
     root.style.setProperty(variable, value);
 }
 
+*/

@@ -1,0 +1,16 @@
+.rojo{
+    color: red;
+
+}
+
+.azul{
+    color: blue;
+}
+
+.verde{
+    background-color: green;
+}
+
+#proximo:hover{
+    background-color: aquamarine;
+}

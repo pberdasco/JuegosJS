@@ -1,31 +1,27 @@
 class Barco {
     static numeroHombre =0;
     static numeroMaquina =0;
+    static ErrorTypes = ["Posicion2 debe ser mayor a Posicion1 y ambas deben estar en el tablero",
+    "El barco colisiona con otro barco (posicion ya ocupada)",
+    "El barco no puede estar pegado a otro barco"];
+
     id = 0;
     TipoId = 0;
     Ubicacion = 0;
     Jugador = 0;
     Estado = [];
+    Error = "";
     constructor(tipoId, ubicacion, tableroLogico, jugador, tipoEnTexto=""){
-        if (ubicacion.EsValida(tableroLogico)){
-            if(tipoId >= 0){
-                this.TipoId = tipoId;
-            }else{
-                this.TipoId = Barco.#BuscarTipoId(tipoEnTexto);
-            }
-            this.Ubicacion = ubicacion;
-            for(let i = 0 ; i < ubicacion.Largo() ; i++){
-                this.Estado.push(false);
-            }
+        this.Ubicacion = ubicacion;
+        const errCode = this.#UbicacionValida(ubicacion, tableroLogico);
+        if (errCode === 0){
+            this.TipoId = (tipoId >= 0) ?  tipoId : Barco.#BuscarTipoId(tipoEnTexto);
+            this.Estado = Array(ubicacion.Largo()).fill(false);
             this.Jugador = jugador;
-            if (this.Jugador === 0){
-                this.id = Barco.numeroHombre++;  
-            }else{
-                this.id = Barco.numeroMaquina++;
-            }
-            
+            this.id = (this.Jugador === 0) ? Barco.numeroHombre++ : Barco.numeroMaquina++; 
         }else{
             this.id = -1;  // implica que no se pudo crear.
+            this.Error = Barco.ErrorTypes[errCode-1];
         }         
     }
 
@@ -36,6 +32,35 @@ class Barco {
             }
         }
         return -1
+    }
+
+    Dibujar(TableroGrafico){
+        if (this.id === -1) return;
+        let pos1 = this.Ubicacion.Posicion1;
+        let pos2 = this.Ubicacion.Posicion2;
+        let estadoIndex = 0;
+        for (let x = pos1.x; x <= pos2.x; x++){
+            for(let y = pos1.y; y <= pos2.y; y++){
+                TableroGrafico[x][y].textContent = this.id.toString();
+                if(this.Estado[estadoIndex]){
+                    TableroGrafico[x][y].style.backgroundColor = "red";
+                }else{
+                    TableroGrafico[x][y].style.backgroundColor = "green";
+                }
+                estadoIndex++;
+            }
+        }
+    }
+
+    AsignarATableroLogico(TableroLogico){
+        if (this.id === -1) return;
+        let pos1 = this.Ubicacion.Posicion1;
+        let pos2 = this.Ubicacion.Posicion2;
+        for (let x = pos1.x-1; x < pos2.x; x++){
+            for(let y = pos1.y-1; y < pos2.y; y++){
+                TableroLogico[x][y] = this.id;
+            }
+        }
     }
 
     MarcarTocado(posicion){
@@ -54,4 +79,9 @@ class Barco {
     Hundido(){
         return this.Estado.every((x) => x === true);
     }
+
+    #UbicacionValida(ubicacion, tableroLogico){
+        if (!ubicacion.EsValida(tableroLogico)) return 1;   // 1 : ubicacion no cae en el tablero
+        return 0;
+     }
 }

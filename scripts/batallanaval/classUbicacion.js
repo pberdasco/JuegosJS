@@ -16,6 +16,9 @@ class Posicion{
 }
 
 class Ubicacion{
+    Posicion1 = 0;
+    Posicion2 = 0;
+
     constructor(posicion1, posicion2 ){
         this.Posicion1 = posicion1;
         this.Posicion2 = posicion2;
@@ -31,17 +34,16 @@ class Ubicacion{
         return largoX + largoY + 1;
     }
 
-    // Devuelve si la Ubicacion es valida en tablero
-    // no debe pisar otro barco
-    // no debe tocarse con otro barco si VALE_PEGADO = false
-    // no debe salirse del tablero
+    // Devuelve 0 si la Ubicacion es valida en tablero
+    //  ==> Pasan a un metodo en barco: no debe pisar otro barco
+    //                                  no debe tocarse con otro barco si VALE_PEGADO = false
+    //                                  no debe salirse del tablero
     EsValida(tablero){
-        if(this.Posicion1.x > this.Posicion2.x || this.Posicion1.y > this.Posicion2.y 
-            /*|| !this.Posicion1.EnTablero(1) || !this.Posicion2.EnTablero(1)*/){
+        // posicion2 debe ser > a posicion1 y las 2 puntas deben estar dentro del tablero
+        if ((this.Posicion1.x > this.Posicion2.x || this.Posicion1.y > this.Posicion2.y) ||
+            (!this.Posicion1.EnTablero(1) || !this.Posicion2.EnTablero(1)))
                 return false;
-        }
-
-        // TODO: falta validar choque de barcos 
-        return true;
+        else   
+                return true;
     }
 }
