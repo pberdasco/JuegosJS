@@ -1,4 +1,8 @@
-const listaPalabrasPosibles = ["murcielago", "marsupial", "helicoptero", "automata", "hiperbola", "legumbre", "uniforme", "entrepiso"]; 
+const listaPalabrasBasicas = ["murcielago", "marsupial", "helicoptero", "automata", "hiperbola", "legumbre", "uniforme", "entrepiso"]; 
+const listaPlanetasStarWars = [];
+let planetasDisponibles = false;
+GetPlanetasData();
+
 let palabraElegida;
 let letrasAcertadas = [];
 
@@ -11,6 +15,7 @@ function ResetAhorcado(){
     errores = 0;
 
     palabraElegida = ElegirPalabra();
+    console.log(palabraElegida);
     letrasAcertadas = InicializarLetrasAcertadas(); 
     
     DisplayPalabra(PalabraVisible()); 
@@ -109,6 +114,52 @@ function PalabraVisible(){
 }
 
 function ElegirPalabra(){
+    
+    if (planetasDisponibles) {
+        listaPalabrasPosibles = [];
+        if (document.querySelector("#chkboxBasicas").checked || !document.querySelector("#chkboxPlanetas").checked) listaPalabrasPosibles.push(...listaPalabrasBasicas);
+        if (document.querySelector("#chkboxPlanetas").checked) listaPalabrasPosibles.push(...listaPlanetasStarWars);
+    }else{
+        listaPalabrasPosibles = [...listaPalabrasBasicas];
+    }
+console.log(listaPalabrasPosibles);
     return listaPalabrasPosibles[getRndInteger(0, listaPalabrasPosibles.length)];
 }
 
+
+
+function GetPlanetasData(){
+    fetch("http://swapi.dev/api/planets/")
+          .then((response) => response.json())
+          .then((jsonPlanetas => CargaListaPlanetas(jsonPlanetas)))
+     
+    function CargaListaPlanetas(jsonPlanetas){
+        for (let i =0; i < jsonPlanetas.results.length; i++){
+            let nombrePlaneta = jsonPlanetas.results[i].name;
+            if (!nombrePlaneta.includes(" "))
+                listaPlanetasStarWars.push(nombrePlaneta);  // Solo planetas de una sola palabra
+        }
+        HabilitaPlanetas();     
+    }
+
+    //TODO: ver como ejecutar la funcion recursivamente para cargar todas las paginas.
+}
+
+function HabilitaPlanetas(){
+    // solo cuando estan cargados los planetas permito seleccionar si se incluyen o no
+    // mientras tanto puede jugar con las palabras basicas
+
+    planetasDisponibles = true;
+    
+    const tituloChecks = document.createElement("div");
+    tituloChecks.innerHTML = `<h3 id="incluye" class="incluye">Incluir</h3>`;
+    const checkBasicas = document.createElement("div");
+    checkBasicas.innerHTML = `<label for= "chkboxBasicas"> <input type="checkbox" id="chkboxBasicas" checked> Palabras Basicas </label>`;
+    const checkPlanetas = document.createElement("div");
+    checkPlanetas.innerHTML = `<label for= "chkboxPlanetas"> <input type="checkbox" id="chkboxPlanetas"> Planetas StarWars </label>`;
+    
+    incluir = document.querySelector(".espacioIncluye");  
+    incluir.append(tituloChecks);
+    incluir.append(checkBasicas); 
+    incluir.append(checkPlanetas); 
+}

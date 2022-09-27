@@ -34,20 +34,22 @@ class Barco {
         return -1
     }
 
-    Dibujar(TableroGrafico){
+    Dibujar(TableroGrafico, clase = ""){
         if (this.id === -1) return;
         let pos1 = this.Ubicacion.Posicion1;
         let pos2 = this.Ubicacion.Posicion2;
         let estadoIndex = 0;
         for (let x = pos1.x; x <= pos2.x; x++){
             for(let y = pos1.y; y <= pos2.y; y++){
-                TableroGrafico[x][y].textContent = this.id.toString();
-                if(this.Estado[estadoIndex]){
-                    TableroGrafico[x][y].style.backgroundColor = "red";
+                TableroGrafico[x][y].classList.remove("bn_celda_blanco", "bn_celda_barco", "bn_celda_tocado", "bn_celda_prueba")
+                if (!clase){
+                    TableroGrafico[x][y].textContent = this.id.toString();
+                    if(this.Estado[estadoIndex]) TableroGrafico[x][y].classList.add("bn_celda_tocado");
+                    else TableroGrafico[x][y].classList.add("bn_celda_barco");
+                    estadoIndex++;
                 }else{
-                    TableroGrafico[x][y].style.backgroundColor = "green";
+                    TableroGrafico[x][y].classList.add(clase);
                 }
-                estadoIndex++;
             }
         }
     }
@@ -82,6 +84,27 @@ class Barco {
 
     #UbicacionValida(ubicacion, tableroLogico){
         if (!ubicacion.EsValida(tableroLogico)) return 1;   // 1 : ubicacion no cae en el tablero
+
+        let pos1 = ubicacion.Posicion1;
+        let pos2 = ubicacion.Posicion2;
+        for (let x = pos1.x-1; x < pos2.x; x++){
+            for(let y = pos1.y-1; y < pos2.y; y++){
+                if (tableroLogico[x][y] != 99) return 2;  // 2: hay un barco en la misma posicion
+                if (!VALE_PEGADO && Lindero(x,y,tableroLogico)) return 3;  //3: esta pegado a otro barco
+            }
+        }
         return 0;
-     }
+
+        function Lindero(x, y, tableroLogico) {
+            const p = new Posicion(0 , 0);
+            for (let i = -1; i <=1; i++ ){
+                for (let j = -1; j <= 1; j++){
+                    p.x = x + i;
+                    p.y = y + j;
+                    if (p.EnTablero(0) && tableroLogico[x+i][y+j] != 99) return true;
+                }
+            }
+            return false;
+        }
+    }
 }

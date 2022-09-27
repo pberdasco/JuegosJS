@@ -9,12 +9,9 @@ T_Maquina_Propio = new Tablero(2,-1);
 T_Maquina_Disparos = new Tablero(3,-1);
 
 let barcoSeleccionado;
+BarcosM = CrearBarcosMaquina(T_Maquina_Propio);
 IngresoBarcos();
-//const BarcosM = CrearBarcosMaquina(T_Maquina_Propio); 
-
-//Esto no sería necesario pues IngresoBarcos va dibujando.
-//BarcosJ.forEach((e) => {e.Dibujar(T_Jugador_Propio.Grafico)});
-
+ 
 
 function IngresoBarcos(){
     const mensaje = document.querySelector(".bn_mensajeIngreso");
@@ -36,10 +33,10 @@ function IngresoEvent(e){
     desde = new Posicion(ubEvento.f, ubEvento.c);
     hasta = CalculaPosicionHasta(ubEvento, direccion);
     
-    if (barcoSeleccionado) PropuestaUbicacion(barcoSeleccionado.Ubicacion, false); // reubicando barco
+    if (barcoSeleccionado) barcoSeleccionado.Dibujar(T_Jugador_Propio.Grafico,"bn_celda_blanco"); // reubicando barco
     barcoSeleccionado = new Barco(TiposBarco[IngresoBarcoEnv.tipoNumero].id,new Ubicacion(desde, hasta),T_Jugador_Propio.Logico,0);
     if (barcoSeleccionado.id >=0){
-        PropuestaUbicacion(barcoSeleccionado.Ubicacion, true);
+        barcoSeleccionado.Dibujar(T_Jugador_Propio.Grafico,"bn_celda_prueba");
     }
     else{
         console.log(barcoSeleccionado.Error);
@@ -48,13 +45,6 @@ function IngresoEvent(e){
      
 }
 
-function PropuestaUbicacion(ubicacion, muestra){
-    for (let x = ubicacion.Posicion1.x; x <= ubicacion.Posicion2.x; x++){
-        for(let y = ubicacion.Posicion1.y; y <= ubicacion.Posicion2.y; y++){
-            T_Jugador_Propio.Grafico[x][y].style.backgroundColor = (muestra) ? "yellow" : "white";
-        }
-    }
-}
 
 function CrearBarcoEvent(e){
     CrearBarco(T_Jugador_Propio);
@@ -118,6 +108,27 @@ function UbicacionEvento(e){
     } );
     return {f: fila, c: columna};
 }
+
+
+function CrearBarcosMaquina(tablero){
+    const ibm = {barcoNumero: 0,   
+                barcosTipo: 1,    // cuantos barcos lleva ingresados del tipo actual
+                tipoNumero: 0};
+    
+    
+    do{
+        x1 = getRndInteger(1, MAX_X);
+        y1 = getRndInteger(1, MAX_Y);
+        dir = getRndInteger(0,1);
+        x2 = x1 + ((1 - dir) * (TiposBarco[ibm.tipoNumero].longitud - 1));
+        y2 = y1 + ((dir) * (TiposBarco[ibm.tipoNumero].longitud - 1));
+
+        console.log(`{x1: ${x1}, y1: ${y1}} -  {x2: ${x2}, y2: ${y2}} `)
+    }while(ProximoBarco(ibm));
+    
+
+}
+
 
 function JuegoBN(e){
     console.log("continuar el juego");

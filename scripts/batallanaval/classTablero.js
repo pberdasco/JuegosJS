@@ -44,6 +44,6 @@ function CreateTR(tablero){
 function CreateTD(linea, i, j){
     const f_c_class = "tfc-" + String(i).padStart(2,"0") + "-" + String(j).padStart(2,"0");
     const element = document.createElement("td");
-    element.classList.add("bn_celda", f_c_class)
+    element.classList.add("bn_celda", "bn_celda_blanco", f_c_class)
     return linea.appendChild(element);
 }
