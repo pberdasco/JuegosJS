@@ -44,7 +44,7 @@
     background-color: var(--nav-color);
 }
 
-.bn_mensajeIngreso{
+.bn_mensajeIngreso, .bn_mensajeIngreso2{
     text-align: center;
     padding: 5px;
 }

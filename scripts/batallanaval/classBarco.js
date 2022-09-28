@@ -11,11 +11,11 @@ class Barco {
     Jugador = 0;
     Estado = [];
     Error = "";
-    constructor(tipoId, ubicacion, tableroLogico, jugador, tipoEnTexto=""){
+    constructor(tipoId, ubicacion, tableroLogico, jugador){
         this.Ubicacion = ubicacion;
         const errCode = this.#UbicacionValida(ubicacion, tableroLogico);
         if (errCode === 0){
-            this.TipoId = (tipoId >= 0) ?  tipoId : Barco.#BuscarTipoId(tipoEnTexto);
+            this.TipoId = tipoId;
             this.Estado = Array(ubicacion.Largo()).fill(false);
             this.Jugador = jugador;
             this.id = (this.Jugador === 0) ? Barco.numeroHombre++ : Barco.numeroMaquina++; 
@@ -25,15 +25,7 @@ class Barco {
         }         
     }
 
-    static #BuscarTipoId(tipoABuscar){
-        for(let i = 0; i < TiposBarco.length ; i++){
-            if(TiposBarco[i].tipo.toLowerCase() === tipoABuscar.toLowerCase()){
-                return TiposBarco[i].id;
-            }
-        }
-        return -1
-    }
-
+    
     Dibujar(TableroGrafico, clase = ""){
         if (this.id === -1) return;
         let pos1 = this.Ubicacion.Posicion1;

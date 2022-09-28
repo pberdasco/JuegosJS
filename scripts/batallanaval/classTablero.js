@@ -11,29 +11,32 @@ class Tablero{
                 this.Logico[i].push(CELDA_VACIA);          
             }
         }
-        if (dibuja >= 0) this.Grafico = dibujarTablero(dibuja,MAX_X,MAX_Y);
+        if (dibuja >= 0) this.Grafico = Tablero.#dibujar(dibuja);
     }
-}
 
-
-function dibujarTablero(lado, maxX, maxY){
-    const tableros = ["#bn_tableroJujadorPropio", "#bn_tableroJugadorDisparos"]
-    const tablero = document.querySelector(tableros[lado]);
-    tablero.textContent = "";
-    const celdas = [];
-
-    for(let i= 0; i <= maxY; i++){
-        const linea = CreateTR(tablero);
-        celdas.push([]); 
-        for(let j= 0; j <= maxX; j++){
-            const column = CreateTD(linea, i, j);
-            celdas[i].push(column);          
+    static #dibujar = (lado) => {
+        const tableros = ["#bn_tableroJujadorPropio", "#bn_tableroJugadorDisparos"]
+        const tablero = document.querySelector(tableros[lado]);
+        tablero.textContent = "";
+        const celdas = [];
+    
+        for(let i= 0; i <= MAX_Y; i++){
+            const linea = CreateTR(tablero);
+            celdas.push([]); 
+            for(let j= 0; j <= MAX_X; j++){
+                const column = CreateTD(linea, i, j);
+                celdas[i].push(column);          
+            }
         }
+        celdas[0][0] = tablero;
+        PintarCoordenadas(celdas, MAX_X, MAX_Y); 
+        return celdas;
     }
-    celdas[0][0] = tablero;
-    PintarCoordenadas(celdas, maxX, maxY); 
-    return celdas;
+
 }
+
+
+
 
 function CreateTR(tablero){
     const element = document.createElement("tr");

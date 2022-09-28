@@ -19,12 +19,39 @@ function ValidarDisparo(arrayBarcos, posicionDisparo){
     return -1;
 }
 
-function DefinirTiposBarco(){
-    TiposBarco.push(new TipoBarco("Submarino", 1, 3));
-    TiposBarco.push(new TipoBarco("Corbeta", 2, 2));
-    TiposBarco.push(new TipoBarco("Fragata", 3, 1));
-    TiposBarco.push(new TipoBarco("Destructor", 4, 1));
-    TiposBarco.push(new TipoBarco("Portaaviones", 5, 1));   
+function CalculaPosicionHasta(ub, tipo){
+    let hastafila = ub.f + ((1 - ub.dir) * (tipo.longitud - 1));
+    let hastacolumna = ub.c + ((ub.dir) * (tipo.longitud -1));
+    return new Posicion(hastafila,hastacolumna);
+}
+
+function CrearBarco(tablero, barcos, barco, dibujar=true){
+    barcos.push(barco);
+    barco.AsignarATableroLogico(tablero.Logico);
+    if (dibujar) barco.Dibujar(tablero.Grafico);
+    barco.id = -2;
+}
+
+function CrearBarcosMaquina(tablero){
+    const ibm = {barcoNumero: 0, barcosTipo: 1, tipoNumero: 0};
+    
+    do{
+        // let intentos = 0;
+        do{
+            ub = {f: getRndInteger(1, MAX_X), c: getRndInteger(1, MAX_Y), dir: getRndInteger(0,1)};
+            desde = new Posicion(ub.f, ub.c);
+            hasta = CalculaPosicionHasta(ub, TiposBarco[ibm.tipoNumero]);
+            nuevoBarco = new Barco(TiposBarco[ibm.tipoNumero].id,new Ubicacion(desde, hasta),T_Maquina_Propio.Logico,1);    
+            // intentos++;   
+        }while(nuevoBarco.id === -1)
+        // console.log("barco creado. intentos: ", intentos);
+        CrearBarco(T_Maquina_Propio, BarcosM, nuevoBarco, false);
+    }while(ProximoBarco(ibm));
+
+    // console.log(T_Maquina_Propio.Logico);
+    // console.log(BarcosM);
+
+    BarcosM.forEach(e => {e.Dibujar(T_Jugador_Disparos.Grafico,"bn_celda_prueba")});
 }
 
 
